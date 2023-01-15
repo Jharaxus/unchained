@@ -7,6 +7,7 @@ To run the web app, you need to have node installed on your machine. Then, if yo
 
 Finnaly, run the following commands:
 > npm install
+
 > http-server
 
 The web application can be found at `http://localhost:8080/pages/home.html`
