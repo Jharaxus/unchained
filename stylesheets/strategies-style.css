@@ -87,6 +87,7 @@ body {
 
 .title {
   align-self: flex-start;
+  font-weight: bolder;
 }
 
 .strategy-schematic {
@@ -301,6 +302,14 @@ button.supply-button {
   margin-left: var(--large-padding);
   color: var(--box-bg-color);
   border-radius: var(--box-border-radius);
+}
+
+.chart-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: var(--box-small-width)
 }
 
 .title-1 {
