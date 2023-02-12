@@ -1,0 +1,241 @@
+:root {  
+  --merge-margin: 0.01rem;
+  --merge-margin-neg: -0.01rem;
+
+  --shadow-size: 8px;
+  --shadow-size-half: 4px;
+  --shadow-size-neg: -8px;
+  --shadow-size-half-neg: -4px;
+
+  --schematic-dot-radius: .3rem;
+  --schematic-line-length: 1rem;
+  --schematic-line-thickness: .06rem;
+
+  --box-large-width: 10rem;
+  --box-small-width: 4.825rem;
+  
+  --box-vertical-margin: .15rem;
+  --box-vertical-large-margin: .3rem;
+
+  --box-border-radius: 0.2rem;
+
+  --main-bg-gradient-start-color: hsl(204, 71%, 19%);
+  --main-bg-gradient-end-color: rgb(6, 23, 70);
+
+  --color-aave: rgb(166 88 156);
+  --color-paladin: rgb(226 111 69);
+  --color-apwine: rgb(84 75 236);
+}
+
+html {
+  font-size: 7vw;
+  color: white;
+}
+
+body {
+  height: var(--body-height);
+  background: linear-gradient(to bottom, var(--main-bg-gradient-start-color) 0%, var(--main-bg-gradient-end-color) 100%) repeat;
+
+}
+
+.top-bar {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.strategy-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.strategy-body .sub-body {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+  width:  var(--box-large-width);
+}
+
+.title {
+  align-self: flex-start;
+}
+
+.strategy-schematic {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-content: center;
+  width: var(--box-large-width);
+  margin-bottom: var(--box-vertical-large-margin);
+}
+
+.schematic-connection {
+  display: flex;
+  flex-direction: row;
+}
+
+.schematic-connection .dot {
+  height: var(--schematic-dot-radius);
+  width: var(--schematic-dot-radius);
+  border-radius: 50%;
+  display: block;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.schematic-connection .left {
+  margin-right: var(--merge-margin-neg);
+}
+
+.schematic-connection .right {
+  margin-left: var(--merge-margin-neg);
+}
+
+.aave-paladin .left {
+  background-color: var(--color-aave);
+}
+
+.aave-paladin .right, .paladin-apwine .left {
+  background-color: var(--color-paladin);
+}
+
+.paladin-apwine .right {
+  background-color: var(--color-apwine);
+}
+
+.schematic-connection .line {
+  width: var(--schematic-line-length);
+  height: var(--schematic-line-thickness);
+  display: block;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.aave-paladin .line {
+  background: linear-gradient(to right, var(--color-aave) 0%, var(--color-paladin) 100%)
+}
+
+.paladin-apwine .line {
+  background: linear-gradient(to right, var(--color-paladin) 0%, var(--color-apwine) 100%)
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color:rgb(30, 30, 37);
+  box-shadow: 0px 0px var(--shadow-size) 0px #000000;
+  width: var(--box-large-width);
+  margin-top: var(--box-vertical-margin);
+  margin-bottom: var(--box-vertical-margin);
+  border-radius: var(--box-border-radius);
+}
+
+.sub-body .box {
+  width: var(--box-small-width);
+}
+
+.sub-body .left {
+  margin-right: var(--box-vertical-margin);
+}
+
+.sub-body .right {
+  margin-left: var(--box-vertical-margin);
+}
+
+.protocol-description {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: flex-start;
+  width: var(--box-large-width);
+}
+
+img.protocol-description-logo {
+  display: block;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: var(--box-vertical-margin);
+  margin-right: var(--box-vertical-margin);
+}
+
+div.deposit-withdraw {
+  margin-top: var(--merge-margin);
+}
+
+button.deposit-button, button.withdraw-button  {
+  border-style: none;
+  color: white;
+  font-weight: normal;
+  margin-bottom: 0px;
+  transform: translate(0px, -10px);
+}
+
+button.deposit-button.selected, button.withdraw-button.selected {
+  margin-bottom: var(--merge-margin-neg);
+  transform: none;
+  border-radius: var(--box-border-radius) var(--box-border-radius) 0px 0px;
+  box-shadow:
+    var(--shadow-size)      0px                     var(--shadow-size) var(--shadow-size-neg) rgba(0, 0, 0, 0.65),
+    var(--shadow-size)      var(--shadow-size-neg)  var(--shadow-size) var(--shadow-size-neg) rgba(0, 0, 0, 0.35),
+    0px                     var(--shadow-size-neg)  var(--shadow-size) var(--shadow-size-neg) rgba(0, 0, 0, 0.5),
+    var(--shadow-size-neg)  var(--shadow-size-neg)  var(--shadow-size) var(--shadow-size-neg) rgba(0, 0, 0, 0.35),
+    var(--shadow-size-neg)  0px                     var(--shadow-size) var(--shadow-size-neg) rgba(0, 0, 0, 0.65);
+}
+
+.box.deposit-withdraw-interface {
+  margin-top: var(--merge-margin-neg);
+}
+
+.box.deposit-withdraw-interface.left-selected {
+  border-radius: 0px var(--box-border-radius) var(--box-border-radius) var(--box-border-radius);
+}
+
+.box.deposit-withdraw-interface.right-selected {
+  border-radius: var(--box-border-radius) 0px var(--box-border-radius) var(--box-border-radius);
+}
+
+.title-1 {
+  font-size: 0.5rem;
+}
+
+.title-2 {
+  font-size: .35rem;
+}
+
+.title-3 {
+  font-size: .2rem;
+}
+
+.value-1 {
+  font-size: .2rem;
+}
+
+.value-2 {
+  font-size: .15rem;
+}
+
+.text-1 {
+  font-size: .25rem;
+}
+
+.text-2 {
+  font-size: .2rem;
+}
+
+.image-large {
+  width: 1rem;
+  height: 1rem;
+}
+
+.image-medium {
+  width: .75rem;
+  height: .75rem;
+}
+
+.image-small {
+  width: .5rem;
+  height: .5rem;
+}
