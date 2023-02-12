@@ -1,11 +1,22 @@
+@font-face {
+  font-family: "Inter";
+  src: url('../resources/fonts/RasmusAndersson-Inter/1593443255914-Inter-V.ttf');
+}
+
 :root {  
   --merge-margin: 0.01rem;
   --merge-margin-neg: -0.01rem;
+
+  --small-padding: .1rem;
+  --medium-padding: .35rem;
+  --large-padding: .75rem;
 
   --shadow-size: 8px;
   --shadow-size-half: 4px;
   --shadow-size-neg: -8px;
   --shadow-size-half-neg: -4px;
+
+  --delimiter-width: .01rem;
 
   --schematic-dot-radius: .3rem;
   --schematic-line-length: 1rem;
@@ -19,23 +30,39 @@
 
   --box-border-radius: 0.2rem;
 
+  --main-text-color: white;
+
   --main-bg-gradient-start-color: hsl(204, 71%, 19%);
   --main-bg-gradient-end-color: rgb(6, 23, 70);
+
+  --shadow-color: black;
+
+  --box-bg-color: rgb(30, 30, 37);
+  --box-bg-color-gradient-start: rgb(58, 58, 68);
+  --box-secondary-color: rgb(217, 217, 217);
 
   --color-aave: rgb(166 88 156);
   --color-paladin: rgb(226 111 69);
   --color-apwine: rgb(84 75 236);
 }
 
+button.reset-button {
+  border-style: none;
+  color: var(--main-text-color);
+  font-weight: normal;
+  font: Inter;
+  height: fit-content;
+}
+
 html {
   font-size: 7vw;
-  color: white;
+  color: var(--main-text-color);
+  font-family: Inter;
 }
 
 body {
   height: var(--body-height);
   background: linear-gradient(to bottom, var(--main-bg-gradient-start-color) 0%, var(--main-bg-gradient-end-color) 100%) repeat;
-
 }
 
 .top-bar {
@@ -125,8 +152,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color:rgb(30, 30, 37);
-  box-shadow: 0px 0px var(--shadow-size) 0px #000000;
+  background-color: var(--box-bg-color);
+  box-shadow: 0px 0px var(--shadow-size) 0px var(--shadow-color);
   width: var(--box-large-width);
   margin-top: var(--box-vertical-margin);
   margin-bottom: var(--box-vertical-margin);
@@ -165,10 +192,9 @@ div.deposit-withdraw {
   margin-top: var(--merge-margin);
 }
 
-button.deposit-button, button.withdraw-button  {
-  border-style: none;
-  color: white;
-  font-weight: normal;
+.deposit-button, .withdraw-button  {
+  padding-top: var(--small-padding);
+  padding-bottom: var(--small-padding);
   margin-bottom: 0px;
   transform: translate(0px, -10px);
 }
@@ -176,6 +202,7 @@ button.deposit-button, button.withdraw-button  {
 button.deposit-button.selected, button.withdraw-button.selected {
   margin-bottom: var(--merge-margin-neg);
   transform: none;
+  background: linear-gradient(to bottom, var(--box-bg-color-gradient-start) 0%, var(--box-bg-color) 100%);
   border-radius: var(--box-border-radius) var(--box-border-radius) 0px 0px;
   box-shadow:
     var(--shadow-size)      0px                     var(--shadow-size) var(--shadow-size-neg) rgba(0, 0, 0, 0.65),
@@ -195,6 +222,85 @@ button.deposit-button.selected, button.withdraw-button.selected {
 
 .box.deposit-withdraw-interface.right-selected {
   border-radius: var(--box-border-radius) 0px var(--box-border-radius) var(--box-border-radius);
+}
+
+.interface-deposit, .interface-withdraw {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.token-selector {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  border-radius: var(--box-border-radius);
+  background-color: var(--box-secondary-color);
+  margin-top: var(--box-vertical-margin);
+}
+
+.token-selector * {
+  margin-right: var(--box-vertical-margin);
+}
+
+.token-selected-logo, .toggle-token-selection-button {
+  display: block;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.token-selected-logo {
+  margin-left: var(--box-vertical-margin);
+}
+
+.token-selected-name {
+  color: var(--box-bg-color);
+  font-weight: bold;
+}
+
+.toggle-token-selection-button {
+  background-color: var(--box-bg-color);
+  border-radius: 50%;
+}
+
+.wallet-balance {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: var(--box-large-width);
+}
+
+.wallet-balance-txt {
+  margin-left: var(--medium-padding);
+}
+
+.deposit-interface-delimiter {
+  height: 0px;
+  width: 80%;
+  border-bottom: var(--delimiter-width) solid var(--box-secondary-color)
+}
+
+.supply-token {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: var(--box-large-width);
+  margin-top: var(--box-vertical-margin);
+}
+
+.supply-txt {
+  margin-right: var(--medium-padding);
+}
+
+button.supply-button {
+  padding: var(--medium-padding);
+  margin-left: var(--large-padding);
+  color: var(--box-bg-color);
+  border-radius: var(--box-border-radius);
 }
 
 .title-1 {
@@ -238,4 +344,9 @@ button.deposit-button.selected, button.withdraw-button.selected {
 .image-small {
   width: .5rem;
   height: .5rem;
+}
+
+.image-xsmall {
+  width: .3rem;
+  height: .3rem;
 }

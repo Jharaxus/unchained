@@ -1,6 +1,9 @@
 const depositButton = document.querySelector('.deposit-button');
 const withdrawButton = document.querySelector('.withdraw-button');
+
 const interfaceBox = document.querySelector('.deposit-withdraw-interface');
+const interfaceDeposit = document.querySelector('.interface-deposit');
+const interfaceWithdraw = document.querySelector('.interface-withdraw');
 
 const depositInterface = 1;
 const withdrawInterface = 2;
@@ -34,6 +37,9 @@ function switchToDeposit() {
   depositButton.classList.add("selected")
   interfaceBox.classList.add("left-selected");
 
+  interfaceWithdraw.style.display = "none";
+  interfaceDeposit.style.display = "flex";
+
   currentInterface = depositInterface;
 }
 
@@ -46,6 +52,9 @@ function switchToWithdraw() {
 
   withdrawButton.classList.add("selected")
   interfaceBox.classList.add("right-selected");
+
+  interfaceDeposit.style.display = "none";
+  interfaceWithdraw.style.display = "flex";
   
   currentInterface = withdrawInterface;
 }
