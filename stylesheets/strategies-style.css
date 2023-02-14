@@ -19,31 +19,34 @@
   --delimiter-width: .01rem;
 
   --schematic-dot-radius: .3rem;
-  --schematic-line-length: 1rem;
+  --schematic-line-length: 1.5rem;
   --schematic-line-thickness: .06rem;
 
   --box-large-width: 10rem;
-  --box-small-width: 4.825rem;
+  --box-small-width: 4.75rem;
   
   --box-vertical-margin: .15rem;
   --box-vertical-large-margin: .3rem;
 
+  --box-border-width: 1px;
   --box-border-radius: 0.2rem;
 
   --main-text-color: white;
 
-  --main-bg-gradient-start-color: hsl(204, 71%, 19%);
-  --main-bg-gradient-end-color: rgb(6, 23, 70);
+  --main-bg-color: rgb(0, 0, 20);
 
   --shadow-color: black;
 
-  --box-bg-color: rgb(30, 30, 37);
-  --box-bg-color-gradient-start: rgb(58, 58, 68);
+  --box-bg-color-gradient-start: rgb(31, 33, 73);
   --box-secondary-color: rgb(217, 217, 217);
+  --box-border-color: rgb(29, 31, 47);
 
-  --color-aave: rgb(166 88 156);
-  --color-paladin: rgb(226 111 69);
-  --color-apwine: rgb(84 75 236);
+  --color-aave: rgba(166, 88, 156, 1);
+  --color-paladin: rgba(226, 111, 69, 1);
+  --color-apwine: rgba(84, 75, 236, 1);
+  --color-paladin-no-alpha: rgba(226, 111, 69, .5);
+  --color-paladin-no-alpha: rgba(226, 111, 69, .5);
+  --color-apwine-no-alpha: rgba(84, 75, 236, .5);
 }
 
 button.reset-button {
@@ -62,7 +65,7 @@ html {
 
 body {
   height: var(--body-height);
-  background: linear-gradient(to bottom, var(--main-bg-gradient-start-color) 0%, var(--main-bg-gradient-end-color) 100%) repeat;
+  background: var(--main-bg-color);
 }
 
 .top-bar {
@@ -107,30 +110,36 @@ body {
 .schematic-connection .dot {
   height: var(--schematic-dot-radius);
   width: var(--schematic-dot-radius);
-  border-radius: 50%;
   display: block;
   margin-top: auto;
   margin-bottom: auto;
 }
 
-.schematic-connection .left {
+.schematic-connection .dot.left {
   margin-right: var(--merge-margin-neg);
+  border-radius: 0% 50% 50% 0%;
 }
 
-.schematic-connection .right {
+.schematic-connection .dot.right {
   margin-left: var(--merge-margin-neg);
+  border-radius: 50% 0% 0% 50%;
+  display: none;
 }
 
-.aave-paladin .left {
-  background-color: var(--color-aave);
+.aave-paladin .dot.left {
+  background: linear-gradient(to right, transparent, var(--color-aave));
 }
 
-.aave-paladin .right, .paladin-apwine .left {
-  background-color: var(--color-paladin);
+.aave-paladin .dot.right {
+  background: linear-gradient(to right, var(--color-paladin), transparent);
 }
 
-.paladin-apwine .right {
-  background-color: var(--color-apwine);
+.paladin-apwine .dot.left {
+  background: linear-gradient(to right, transparent, var(--color-paladin));
+}
+
+.paladin-apwine .dot.right {
+  background: linear-gradient(to right, var(--color-apwine), transparent);
 }
 
 .schematic-connection .line {
@@ -141,24 +150,25 @@ body {
   margin-bottom: auto;
 }
 
-.aave-paladin .line {
-  background: linear-gradient(to right, var(--color-aave) 0%, transparent 50%, var(--color-paladin) 100%)
+.schematic-connection.aave-paladin .line {
+  background: linear-gradient(to right, var(--color-aave), var(--color-paladin), transparent)
 }
 
-.paladin-apwine .line {
-  background: linear-gradient(to right, var(--color-paladin) 0%, transparent 50%, var(--color-apwine) 100%)
+.schematic-connection.paladin-apwine .line {
+  background: linear-gradient(to right, var(--color-paladin) , var(--color-apwine), transparent)
 }
 
 .box {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: var(--box-bg-color);
+  background: radial-gradient(circle at center, var(--box-bg-color-gradient-start) 0%, transparent 100%);
   box-shadow: 0px 0px var(--shadow-size) 0px var(--shadow-color);
   width: var(--box-large-width);
   margin-top: var(--box-vertical-margin);
   margin-bottom: var(--box-vertical-margin);
   border-radius: var(--box-border-radius);
+  border: var(--box-border-width) solid var(--box-border-color);
 }
 
 .sub-body .box {
@@ -203,7 +213,7 @@ div.deposit-withdraw {
 button.deposit-button.selected, button.withdraw-button.selected {
   margin-bottom: var(--merge-margin-neg);
   transform: none;
-  background: linear-gradient(to bottom, var(--box-bg-color-gradient-start) 0%, var(--box-bg-color) 100%);
+  background: linear-gradient(to bottom, transparent 0%, var(--box-border-color) 100%);
   border-radius: var(--box-border-radius) var(--box-border-radius) 0px 0px;
   box-shadow:
     var(--shadow-size)      0px                     var(--shadow-size) var(--shadow-size-neg) rgba(0, 0, 0, 0.65),
@@ -257,12 +267,12 @@ button.deposit-button.selected, button.withdraw-button.selected {
 }
 
 .token-selected-name {
-  color: var(--box-bg-color);
+  color: var(--main-bg-color);
   font-weight: bold;
 }
 
 .toggle-token-selection-button {
-  background-color: var(--box-bg-color);
+  background-color: var(--main-bg-color);
   border-radius: 50%;
 }
 
