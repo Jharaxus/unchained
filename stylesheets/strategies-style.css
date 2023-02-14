@@ -18,12 +18,12 @@
 
   --delimiter-width: .01rem;
 
-  --schematic-dot-radius: .3rem;
-  --schematic-line-length: 1.5rem;
+  --schematic-dot-radius: .4rem;
+  --schematic-line-length: 2.5rem;
   --schematic-line-thickness: .06rem;
 
-  --box-large-width: 10rem;
-  --box-small-width: 4.75rem;
+  --box-large-width: 15rem;
+  --box-small-width: 7.25rem;
   
   --box-vertical-margin: .15rem;
   --box-vertical-large-margin: .3rem;
@@ -32,14 +32,22 @@
   --box-border-radius: 0.2rem;
 
   --main-text-color: white;
+  --sub-text-color: rgb(181, 189, 206);
 
   --main-bg-color: rgb(0, 0, 20);
+  --bg-light-1-color: rgba(33, 21, 71, 0.76);
+  --bg-light-2-color: rgba(27, 35, 78, 0.8);
+  --bg-light-3-color: rgba(30, 65, 65, 0.47);
 
   --shadow-color: black;
 
   --box-bg-color-gradient-start: rgb(31, 33, 73);
   --box-secondary-color: rgb(217, 217, 217);
   --box-border-color: rgb(29, 31, 47);
+
+  --risk-low-color: rgba(30, 150, 60, 0.896);
+  --risk-medium-color: rgb(114, 150, 30);
+  --risk-high-color: rgb(150, 86, 30);
 
   --color-aave: rgba(166, 88, 156, 1);
   --color-paladin: rgba(226, 111, 69, 1);
@@ -65,7 +73,17 @@ html {
 
 body {
   height: var(--body-height);
-  background: var(--main-bg-color);
+  background:
+    no-repeat radial-gradient(var(--bg-light-1-color) 0%, transparent 60%) 250% -25% / 120% 40%,
+    no-repeat radial-gradient(var(--bg-light-1-color) 0%, transparent 60%) 50% 40% / 160% 80%,
+    no-repeat radial-gradient(var(--bg-light-3-color) 0%, transparent 60%) 50% 320% / 160% 80%,
+    /* no-repeat radial-gradient(blue 0%, transparent 60%) 50% 20% / 120% 40%,
+    no-repeat radial-gradient(green 0%, transparent 60%) 50% 70% / 120% 40%,
+    no-repeat radial-gradient(red 0%, transparent 60%) 50% 100% / 120% 40%, */
+    /* no-repeat radial-gradient(var(--bg-light-1-color) 0%, transparent 60%) -40% 0% / 120% 40%,
+    no-repeat radial-gradient(var(--bg-light-1-color) 0%, transparent 60%) 120% 0% / 120% 40%,
+    no-repeat radial-gradient(var(--bg-light-3-color) 0%, transparent 60%) -60% 0% / 120% 40%, */
+    var(--main-bg-color);
 }
 
 .top-bar {
@@ -181,6 +199,18 @@ body {
 
 .sub-body .right {
   margin-left: var(--box-vertical-margin);
+}
+
+.effective-risk.low {
+  color: var(--risk-low-color);
+}
+
+.effective-risk.medium {
+  color: var(--risk-medium-color);
+}
+
+.effective-risk.high {
+  color: var(--risk-high-color);
 }
 
 .protocol-description {
@@ -322,6 +352,14 @@ button.supply-button {
   justify-content: center;
   align-items: center;
   width: var(--box-small-width)
+}
+
+.sub-text {
+  color: var(--sub-text-color);
+}
+
+.highlight-text {
+  font-weight: bolder;
 }
 
 .title-1 {
