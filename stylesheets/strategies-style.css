@@ -55,7 +55,7 @@ button.reset-button {
 }
 
 html {
-  font-size: 7vw;
+  font-size: 4vw;
   color: var(--main-text-color);
   font-family: Inter;
 }
@@ -142,11 +142,11 @@ body {
 }
 
 .aave-paladin .line {
-  background: linear-gradient(to right, var(--color-aave) 0%, var(--color-paladin) 100%)
+  background: linear-gradient(to right, var(--color-aave) 0%, transparent 50%, var(--color-paladin) 100%)
 }
 
 .paladin-apwine .line {
-  background: linear-gradient(to right, var(--color-paladin) 0%, var(--color-apwine) 100%)
+  background: linear-gradient(to right, var(--color-paladin) 0%, transparent 50%, var(--color-apwine) 100%)
 }
 
 .box {
@@ -302,6 +302,8 @@ button.supply-button {
   margin-left: var(--large-padding);
   color: var(--box-bg-color);
   border-radius: var(--box-border-radius);
+  font-weight: bold;
+  background: linear-gradient(92.88deg, rgb(69, 94, 181) 9.16%, rgb(86, 67, 204) 43.89%, rgb(103, 63, 215) 64.72%)
 }
 
 .chart-box {

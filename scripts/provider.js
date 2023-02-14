@@ -15,7 +15,6 @@ const ethereumButton = document.querySelector('.enableEthereumButton');
 
 // Initialise the active account and chain id
 let activeAccount;
-let activeChainId;
 
 // Update the account and chain id when user clicks on button
 ethereumButton.addEventListener('click', () => {
