@@ -34,7 +34,7 @@
   --main-text-color: white;
   --sub-text-color: rgb(181, 189, 206);
 
-  --main-bg-color: rgb(0, 0, 20);
+  --main-bg-color: rgb(2, 9, 26);
   --bg-light-1-color: rgba(33, 21, 71, 0.76);
   --bg-light-2-color: rgba(27, 35, 78, 0.8);
   --bg-light-3-color: rgba(30, 65, 65, 0.47);
@@ -238,6 +238,7 @@ div.deposit-withdraw {
   padding-bottom: var(--small-padding);
   margin-bottom: 0px;
   transform: translate(0px, -10px);
+  background: linear-gradient(93.3deg, rgb(203, 184, 255) 0%, rgb(128, 125, 255) 100%);
 }
 
 button.deposit-button.selected, button.withdraw-button.selected {
