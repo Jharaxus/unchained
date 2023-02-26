@@ -99,7 +99,8 @@ body {
 }
 
 .presentation * {
-  width: var(--box-large-width);
+  /* width: var(--box-large-width); */
+  width: 100%;
 }
 
 .top-information {
@@ -109,6 +110,8 @@ body {
 
 .top-information p {
   line-height: .4rem;
+  padding-left: 3.5rem;
+  padding-right: 2rem;
 }
 
 .value-proposition {
@@ -116,6 +119,8 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background:
+  linear-gradient(to bottom, rgb(0, 2, 17), transparent, rgb(4, 6, 20));
 }
 
 .value-proposition p.statement {
@@ -137,7 +142,7 @@ body {
   margin-top: var(--box-vertical-margin);
   margin-bottom: var(--box-vertical-large-margin);
   height: 0px;
-  width: 95%;
+  width: 75%;
   border-bottom: var(--delimiter-width) solid var(--box-secondary-color)
 }
 

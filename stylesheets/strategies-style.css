@@ -238,7 +238,8 @@ div.deposit-withdraw {
   padding-bottom: var(--small-padding);
   margin-bottom: 0px;
   transform: translate(0px, -10px);
-  background: linear-gradient(93.3deg, rgb(203, 184, 255) 0%, rgb(128, 125, 255) 100%);
+  background: linear-gradient(93.3deg, rgb(203, 184, 255) 0%, rgb(128, 125, 255) 100%) text;
+  /* todo up */
 }
 
 button.deposit-button.selected, button.withdraw-button.selected {
