@@ -74,7 +74,7 @@ html {
 body {
   height: var(--body-height);
   background:
-    no-repeat radial-gradient(var(--bg-light-1-color) 0%, transparent 60%) 250% -25% / 120% 40%,
+   /* no-repeat radial-gradient(var(--bg-light-1-color) 0%, transparent 60%) 250% -25% / 120% 40%,
     no-repeat radial-gradient(var(--bg-light-1-color) 0%, transparent 60%) 50% 40% / 160% 80%,
     no-repeat radial-gradient(var(--bg-light-3-color) 0%, transparent 60%) 50% 320% / 160% 80%,
     /* no-repeat radial-gradient(blue 0%, transparent 60%) 50% 20% / 120% 40%,
@@ -86,10 +86,70 @@ body {
     var(--main-bg-color);
 }
 
-.top-bar {
-  display: flex;
-  justify-content: flex-end;
+header {
+  margin-top: -30px;
+  height: 0px;
+  padding-bottom: 100px;
 }
+
+.nav_logo {
+  height: 70px;
+  border-radius: 40px;
+  padding: 10px;
+  padding-right: 190px;
+}
+
+.navbar {
+    position: fixed;
+    padding-top: 30px;
+    width: 97%;
+    z-index: 99;
+    margin-bottom: 10px;
+    backdrop-filter: blur(20px);
+}
+
+.navbar ul {
+  margin-top: 0px;
+  align-items: center;
+  margin-bottom: 0px;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbar ul li {
+  font-size: 20px;
+}
+
+.navbar ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+.navbar ul li:hover {
+  cursor: pointer;
+}
+
+.enableEthereumButton{
+  font-size: 20px;
+  border-color: transparent;
+  border-radius: 30%;
+  padding: 10px;
+  background: linear-gradient(92.88deg, rgb(69, 94, 181) 9.16%, rgb(86, 67, 204) 43.89%, rgb(103, 63, 215) 64.72%);
+  color:white;
+  z-index: 2;
+text-shadow: rgba(0, 0, 0, 0.25) 0px 3px 8px;
+transition: border 120ms  1s, background-color, color, box-shadow, opacity;
+background: linear-gradient(92.88deg, rgb(69, 94, 181) 9.16%, rgb(86, 67, 204) 43.89%, rgb(103, 63, 215) 64.72%);
+border-radius: 1rem;
+}
+
+.enableEthereumButton:hover {
+cursor: pointer;
+background: linear-gradient(92.88deg, rgb(55, 75, 147) 9.16%, rgb(60, 47, 150) 43.89%, rgb(80, 49, 165) 64.72%);
+
+}
+
 
 .strategy-body {
   display: flex;
@@ -176,11 +236,25 @@ body {
   background: linear-gradient(to right, var(--color-paladin) , var(--color-apwine), transparent)
 }
 
+.box-bg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: no-repeat url(../resources/images/landing-page/Image_Soleil.png) 50% 0% / 200% 100%;
+  /*background: radial-gradient(circle at center, var(--box-bg-color-gradient-start) 0%, transparent 100%);*/
+  box-shadow: 0px 0px var(--shadow-size) 0px var(--shadow-color);
+  width: var(--box-large-width);
+  margin-top: var(--box-vertical-margin);
+  margin-bottom: var(--box-vertical-margin);
+  border-radius: var(--box-border-radius);
+  border: var(--box-border-width) solid var(--box-border-color);
+}
+
 .box {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: radial-gradient(circle at center, var(--box-bg-color-gradient-start) 0%, transparent 100%);
+  /*background: radial-gradient(circle at center, var(--box-bg-color-gradient-start) 0%, transparent 100%);*/
   box-shadow: 0px 0px var(--shadow-size) 0px var(--shadow-color);
   width: var(--box-large-width);
   margin-top: var(--box-vertical-margin);
@@ -190,6 +264,10 @@ body {
 }
 
 .sub-body .box {
+  width: var(--box-small-width);
+}
+
+.sub-body .box-bg {
   width: var(--box-small-width);
 }
 
@@ -234,11 +312,12 @@ div.deposit-withdraw {
 }
 
 .deposit-button, .withdraw-button  {
+
   padding-top: var(--small-padding);
   padding-bottom: var(--small-padding);
   margin-bottom: 0px;
   transform: translate(0px, -10px);
-  background: linear-gradient(93.3deg, rgb(203, 184, 255) 0%, rgb(128, 125, 255) 100%) text;
+  background: linear-gradient(to bottom, transparent 0%, var(--box-border-color) 100%);
   /* todo up */
 }
 
@@ -410,4 +489,37 @@ button.supply-button {
 .image-xsmall {
   width: .3rem;
   height: .3rem;
+}
+
+.ray-of-light
+ {
+  position: absolute;
+  top: 11%;
+  left: 0;
+  width: 20px;
+  height: 3px;
+  background: white;
+  opacity: 0.8;
+  animation: ray-of-light-animation 1s linear;
+}
+
+@keyframes ray-of-light-animation {
+  from {
+    transform: translateX(830px); /* Start the ray of light just off the left edge of the delimiter */
+  }
+  to {
+    transform: translateX(930px); /* Move the ray of light across the full width of the delimiter, plus an extra 30 pixels */
+  }
+}
+
+.ray-of-light2 
+{
+  position: absolute;
+  top: 18%;
+  left: 0;
+  width: 20px;
+  height: 3px;
+  opacity: 0.8;
+  background: white;
+  animation: ray-of-light-animation 1s linear;
 }

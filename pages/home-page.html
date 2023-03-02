@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Unchained</title>
+    <link rel='stylesheet' href='../stylesheets/style.css' />
+    <link rel='stylesheet' href='../stylesheets/home-page-style.css' />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <ul>
+          <img src="../resources/images/logo_unchained-removebg-preview.png" class="nav_logo">
+          <li ><a href="http://127.0.0.1:5500/pages/home-page.html">Dashboard</a></li>
+        </li>
+          <li >Docs</li>
+          <li >Security</li>
+          <li >FAQ</li>
+          <button class="enableEthereumButton">Connect to Metamask</button>
+        </ul>
+      </nav>
+    </header>
+    <div class="strategy-body">
+      <div>
+        <p class="title-1">Dashboard</p>
+        <div class="delimiter"></div>
+        <div class="delimiter2"></div>
+      </div>
+      <div class="graphs">
+        <div class="line-chart-box">
+          <div class="title-2">Interest evolution</div>
+          <div>
+            <canvas id="myChart"></canvas>
+          </div>
+        </div>
+        <div class="circular-graph-box">
+          <div class="title-2">Funds distribution</div>
+          <canvas class="distribution-chart" id="Distribution-Chart"></canvas>
+        </div>
+      </div>
+    </div>
+    <ul class="strategiesList">
+      <li class="alpha">
+        <img class="alphaImage" src="../resources/images/alpha-white.webp">
+        <img class="aaveLogo" src="../resources/images/Aave_logo.png">
+        <img class="paladinLogo" src="../resources/images/Paladin_finance_logo.png">
+        <img class="apwineLogo" src="../resources/images/Apwine_logo.png">
+        <p>Estimated APY:</p>
+        <p class="percentage">9.56%</p>
+        <a href="http://127.0.0.1:5500/pages/strategy-alpha.html"><button class="enter-strategie">Enter Alpha Strategie</button></a></button>
+      </li>
+      <li class="beta"> 
+      </li>
+      <li class="gamma"> 
+      </li>
+      <li class="delta"> 
+      </li>
+    </ul>
+</div>
+    </div>
+    <script src="/scripts/animation_Strat.js"></script>
+    <script src="../scripts/graph.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="module" src="../scripts/provider.js"></script>
+    <script type="module" src="../scripts/strategy.js"></script>
+    <script type="module" src="../scripts/stats.js"></script>
+  </body>
+</html>

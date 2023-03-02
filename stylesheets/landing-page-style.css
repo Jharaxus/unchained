@@ -105,7 +105,7 @@ header {
     width: 100%;
     z-index: 99;
     margin-bottom: 10px;
-    backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: blur(20px);
 }
 
 .navbar ul {
@@ -120,6 +120,12 @@ header {
 .navbar ul li {
   font-size: 20px;
 }
+
+.navbar ul li a {
+  color: white;
+  text-decoration: none;
+}
+
 
 .navbar ul li:hover {
   cursor: pointer;
@@ -179,11 +185,14 @@ header {
 }
 
 .delimiter {
-  margin-top: var(--box-vertical-margin);
-  margin-bottom: var(--box-vertical-large-margin);
-  height: 0px;
-  width: 75%;
-  border-bottom: var(--delimiter-width) solid var(--box-secondary-color)
+}
+
+.delimiter2 {
+}
+
+.div-launch-button{
+  width: 100%;
+  text-align: center;
 }
 
 .launch-button {
@@ -195,7 +204,7 @@ header {
   margin-top: var(--box-vertical-large-margin);
   margin-bottom: 0px;
   text-shadow: rgba(0, 0, 0, 0.25) 0px 3px 8px;
-  transition: border 120ms ease 0s, background-color, color, box-shadow, opacity;
+  transition: border 120ms  1s, background-color, color, box-shadow, opacity;
   font-weight: bold;
   background: linear-gradient(92.88deg, rgb(69, 94, 181) 9.16%, rgb(86, 67, 204) 43.89%, rgb(103, 63, 215) 64.72%);
   border-radius: 1rem;
@@ -203,6 +212,7 @@ header {
 
 .launch-button:hover {
   cursor: pointer;
+  background: linear-gradient(92.88deg, rgb(55, 75, 147) 9.16%, rgb(60, 47, 150) 43.89%, rgb(80, 49, 165) 64.72%);
 
 }
 
@@ -236,6 +246,10 @@ header {
 }
 
 .title-1 {
+  font-size: 0.6rem;
+}
+
+.title-1-numbers {
   font-size: 0.6rem;
 }
 
@@ -281,4 +295,35 @@ header {
 .image-xsmall {
   width: .3rem;
   height: .3rem;
+}
+
+.ray-of-light {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 90px;
+  height: 1px;
+  background-color: white;
+  opacity: 0.5;
+  animation: ray-of-light-animation 3s linear;
+}
+
+@keyframes ray-of-light-animation {
+  from {
+    transform: translateX(90px); /* Start the ray of light just off the left edge of the delimiter */
+  }
+  to {
+    transform: translateX(1500px); /* Move the ray of light across the full width of the delimiter, plus an extra 30 pixels */
+  }
+}
+
+.ray-of-light2 {
+  position: absolute;
+  top: 130%;
+  left: 0;
+  width: 90px;
+  height: 1px;
+  background-color: white;
+  opacity: 0.5;
+  animation: ray-of-light-animation 3s linear;
 }

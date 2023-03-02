@@ -1,0 +1,145 @@
+.ray-of-light3,
+.ray-of-light5,
+.ray-of-light7,
+.ray-of-light9,
+.ray-of-light11,
+.ray-of-light4,
+.ray-of-light6,
+.ray-of-light8,
+.ray-of-light10,
+.ray-of-light12
+ {
+  position: absolute;
+  left: 0;
+  width: 10px;
+  height: 1px;
+  background: white;
+  opacity: 0.8;
+}
+
+.ray-of-light3{
+  top: 20%;
+  position: absolute;
+  left: 0;
+  width: 10px;
+  height: 1px;
+  background: white;
+  opacity: 0.8;
+  animation: ray-of-light-animation3 0.25s linear;
+}
+
+
+@keyframes ray-of-light-animation3 {
+  from {
+    transform: translateX(83px); /* Start the ray of light just off the left edge of the delimiter */
+  }
+  to {
+    transform: translateX(180px); /* Move the ray of light across the full width of the delimiter, plus an extra 30 pixels */
+  }
+}
+
+.ray-of-light5{
+  top: 59%;
+  animation: ray-of-light-animation5 0.25s linear;
+}
+
+@keyframes ray-of-light-animation5 {
+  from {
+    transform: translateX(483px); /* Start the ray of light just off the left edge of the delimiter */
+  }
+  to {
+    transform: translateX(580px); /* Move the ray of light across the full width of the delimiter, plus an extra 30 pixels */
+  }
+}
+
+
+.ray-of-light7{
+  top: 80%;
+  animation: ray-of-light-animation7 0.25s linear;
+}
+
+@keyframes ray-of-light-animation7 {
+  from {
+    transform: translateX(683px); /* Start the ray of light just off the left edge of the delimiter */
+  }
+  to {
+    transform: translateX(780px); /* Move the ray of light across the full width of the delimiter, plus an extra 30 pixels */
+  }
+}
+
+
+.ray-of-light9{
+  top: 40%;
+  animation: ray-of-light-animation9 0.25s linear;
+}
+
+@keyframes ray-of-light-animation9 {
+  from {
+    transform: translateX(23px); /* Start the ray of light just off the left edge of the delimiter */
+  }
+  to {
+    transform: translateX(123px); /* Move the ray of light across the full width of the delimiter, plus an extra 30 pixels */
+  }
+}
+
+.ray-of-light11{
+  top: 90%;
+  animation: ray-of-light-animation11 0.25s linear;
+}
+
+@keyframes ray-of-light-animation11 {
+  from {
+    transform: translateX(103px); /* Start the ray of light just off the left edge of the delimiter */
+  }
+  to {
+    transform: translateX(203px); /* Move the ray of light across the full width of the delimiter, plus an extra 30 pixels */
+  }
+}
+
+.ray-of-light13{
+  top: 90%;
+  animation: ray-of-light-animation13 0.25s linear;
+}
+
+@keyframes ray-of-light-animation13 {
+  from {
+    transform: translateX(1430px); /* Start the ray of light just off the left edge of the delimiter */
+  }
+  to {
+    transform: translateX(1530px); /* Move the ray of light across the full width of the delimiter, plus an extra 30 pixels */
+  }
+}
+
+.ray-of-light15{
+  top: 90%;
+  animation: ray-of-light-animation15 0.25s linear;
+}
+
+@keyframes ray-of-light-animation15 {
+  from {
+    transform: translateX(1130px); /* Start the ray of light just off the left edge of the delimiter */
+  }
+  to {
+    transform: translateX(1203px); /* Move the ray of light across the full width of the delimiter, plus an extra 30 pixels */
+  }
+}
+
+.ray-of-light4{
+  top: 60%;
+  position: absolute;
+  left: 0;
+  width: 10px;
+  height: 1px;
+  background: white;
+  opacity: 0.8;
+  animation: ray-of-light-animation4 0.25s linear;
+}
+
+@keyframes ray-of-light-animation4 {
+  from {
+    transform: translateX(183px); /* Start the ray of light just off the left edge of the delimiter */
+  }
+  to {
+    transform: translateX(280px); /* Move the ray of light across the full width of the delimiter, plus an extra 30 pixels */
+  }
+}

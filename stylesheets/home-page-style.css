@@ -1,0 +1,294 @@
+@font-face {
+  font-family: "Inter";
+  src: url('../resources/fonts/RasmusAndersson-Inter/1593443255914-Inter-V.ttf');
+}
+
+:root {  
+  --merge-margin: 0.01rem;
+  --merge-margin-neg: -0.01rem;
+
+  --small-padding: .1rem;
+  --medium-padding: .35rem;
+  --large-padding: .75rem;
+
+  --shadow-size: 8px;
+  --shadow-size-half: 4px;
+  --shadow-size-neg: -8px;
+  --shadow-size-half-neg: -4px;
+
+  --delimiter-width: .01rem;
+
+  --schematic-dot-radius: .4rem;
+  --schematic-line-length: 2.5rem;
+  --schematic-line-thickness: .06rem;
+
+  --box-large-width: 15rem;
+  --box-small-width: 7.25rem;
+  
+  --box-vertical-margin: .15rem;
+  --box-vertical-large-margin: .3rem;
+
+  --box-border-width: 1px;
+  --box-border-radius: 0.2rem;
+
+  --main-text-color: white;
+  --sub-text-color: rgb(181, 189, 206);
+
+  --main-bg-color: rgb(2, 9, 26);
+  --bg-light-1-color: rgba(33, 21, 71, 0.76);
+  --bg-light-2-color: rgba(27, 35, 78, 0.8);
+  --bg-light-3-color: rgba(30, 65, 65, 0.47);
+
+  --shadow-color: black;
+
+  --box-bg-color-gradient-start: rgb(31, 33, 73);
+  --box-secondary-color: rgb(217, 217, 217);
+  --box-border-color: rgb(29, 31, 47);
+
+  --risk-low-color: rgba(30, 150, 60, 0.896);
+  --risk-medium-color: rgb(114, 150, 30);
+  --risk-high-color: rgb(150, 86, 30);
+
+  --color-aave: rgba(166, 88, 156, 1);
+  --color-paladin: rgba(226, 111, 69, 1);
+  --color-apwine: rgba(84, 75, 236, 1);
+  --color-paladin-no-alpha: rgba(226, 111, 69, .5);
+  --color-paladin-no-alpha: rgba(226, 111, 69, .5);
+  --color-apwine-no-alpha: rgba(84, 75, 236, .5);
+}
+
+button.reset-button {
+  border-style: none;
+  color: var(--main-text-color);
+  font-weight: normal;
+  font: Inter;
+  height: fit-content;
+}
+
+html {
+  font-size: 4vw;
+  color: var(--main-text-color);
+  font-family: Inter;
+}
+
+body {
+  height: var(--body-height);
+  background:
+   /* no-repeat radial-gradient(var(--bg-light-1-color) 0%, transparent 60%) 250% -25% / 120% 40%,
+    no-repeat radial-gradient(var(--bg-light-1-color) 0%, transparent 60%) 50% 40% / 160% 80%,
+    no-repeat radial-gradient(var(--bg-light-3-color) 0%, transparent 60%) 50% 320% / 160% 80%,
+    /* no-repeat radial-gradient(blue 0%, transparent 60%) 50% 20% / 120% 40%,
+    no-repeat radial-gradient(green 0%, transparent 60%) 50% 70% / 120% 40%,
+    no-repeat radial-gradient(red 0%, transparent 60%) 50% 100% / 120% 40%, */
+    /* no-repeat radial-gradient(var(--bg-light-1-color) 0%, transparent 60%) -40% 0% / 120% 40%,
+    no-repeat radial-gradient(var(--bg-light-1-color) 0%, transparent 60%) 120% 0% / 120% 40%,
+    no-repeat radial-gradient(var(--bg-light-3-color) 0%, transparent 60%) -60% 0% / 120% 40%, */
+    var(--main-bg-color);
+}
+
+header {
+  margin-top: -30px;
+  height: 0px;
+  padding-bottom: 100px;
+}
+
+.nav_logo {
+  height: 70px;
+  border-radius: 40px;
+  padding: 10px;
+  padding-right: 190px;
+}
+
+.navbar {
+    position: fixed;
+    padding-top: 30px;
+    width: 97%;
+    z-index: 99;
+    margin-bottom: 10px;
+    backdrop-filter: blur(20px);
+}
+
+.navbar ul {
+  margin-top: 0px;
+  align-items: center;
+  margin-bottom: 0px;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbar ul li {
+  font-size: 20px;
+}
+
+.navbar ul li:hover {
+  cursor: pointer;
+}
+
+.navbar ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+
+.enableEthereumButton{
+  font-size: 20px;
+  border-color: transparent;
+  border-radius: 30%;
+  padding: 10px;
+  background: linear-gradient(92.88deg, rgb(69, 94, 181) 9.16%, rgb(86, 67, 204) 43.89%, rgb(103, 63, 215) 64.72%);
+  color:white;
+  z-index: 2;
+  text-shadow: rgba(0, 0, 0, 0.25) 0px 3px 8px;
+  transition: border 120ms  1s, background-color, color, box-shadow, opacity;
+  background: linear-gradient(92.88deg, rgb(69, 94, 181) 9.16%, rgb(86, 67, 204) 43.89%, rgb(103, 63, 215) 64.72%);
+  border-radius: 1rem;
+}
+
+.enableEthereumButton:hover {
+cursor: pointer;
+background: linear-gradient(92.88deg, rgb(55, 75, 147) 9.16%, rgb(60, 47, 150) 43.89%, rgb(80, 49, 165) 64.72%);
+}
+
+.title-1 {
+  padding-top: 20px;
+  padding-left: 5%;
+  font-size: 0.6rem;
+}
+
+.title-2 {
+  font-size: .45rem;
+  padding-bottom: 25px;
+}
+
+.graphs{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 450px;
+  justify-content: space-around;
+  
+}
+
+.line-chart-box{
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  /*border-radius: var(--box-border-radius);
+  border: 5px solid var(--box-border-color);*/
+}
+
+.circular-graph-box{
+  text-align: center;
+  margin-left: 100px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  /*border-radius: var(--box-border-radius);
+  border: 5px solid var(--box-border-color);*/
+}
+
+.distribution-chart{
+  margin-top: 25%;
+}
+
+.strategiesList {
+  margin-top: 200px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: flex-start;
+  /*background:
+  no-repeat url(../resources/images/landing-page/fond_nebuleux.png) center / 200% 200%;*/
+}
+
+.alpha,
+.beta, 
+.gamma,
+.delta {
+  list-style-type: none;
+  height: 450px;
+  width: 450px;
+  border-radius: 50px;
+  background:
+  no-repeat url(../resources/images/landing-page/Image_Soleil.png) 50% 0% / 200% 100%;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  margin-left: 10px;
+  z-index: 1;
+}
+
+.alpha::marker,
+.beta::marker, 
+.gamma::marker,
+.delta::marker {
+  
+}
+
+.aaveLogo,
+.paladinLogo,
+.apwineLogo {
+  height: 80px;
+  margin-bottom: 25px;
+}
+
+.alphaImage{
+  height: 50px;
+  margin-bottom: 40px;
+
+}
+
+
+.alphaImage {
+  margin-top: 40px;
+  margin-left: 40px;
+}
+
+.aaveLogo {
+margin-left: 50px;
+}
+
+.paladinLogo,
+.apwineLogo {
+  margin-left: -40px;
+}
+
+
+.alpha p{
+  margin-top: 0px;
+  text-align: center;
+  color: snow;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+
+.alpha .percentage{
+  text-align: center;
+  font-size: 40px;
+  margin: 0;
+  margin-top: 55px;
+}
+
+.enter-strategie{
+  margin-left: 26%;
+  align-self: center;
+  font-size: 20px;
+  border-color: transparent;
+  border-radius: 30%;
+  padding: 15px;
+  background: linear-gradient(92.88deg, rgb(69, 94, 181) 9.16%, rgb(86, 67, 204) 43.89%, rgb(103, 63, 215) 64.72%);
+  color:white;
+  z-index: 2;
+  text-shadow: rgba(0, 0, 0, 0.25) 0px 3px 8px;
+  transition: border 120ms  1s, background-color, color, box-shadow, opacity;
+  background: linear-gradient(92.88deg, rgb(69, 94, 181) 9.16%, rgb(86, 67, 204) 43.89%, rgb(103, 63, 215) 64.72%);
+  border-radius: 1rem;
+}
+
+.enter-strategie:hover {
+  cursor: pointer;
+  background: linear-gradient(92.88deg, rgb(55, 75, 147) 9.16%, rgb(60, 47, 150) 43.89%, rgb(80, 49, 165) 64.72%);
+  }
