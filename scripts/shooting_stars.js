@@ -7,7 +7,7 @@ function animateRayOfLighttt(delimiterElement, rayOfLightClass) {
   // Set a timeout to remove the ray of light element after 1 second
   setTimeout(() => {
     delimiterElement.removeChild(rayOfLightElement); // Remove the ray of light element from the delimiter element
-  }, 250);
+  }, 1000);
 }
 
 // Set an interval to animate the ray of light every 2 seconds for the first delimiter element

@@ -101,33 +101,39 @@
               <p class="wallet-balance-txt text-1">
                 Wallet-balance
                 <br>
-                4.125 Aave
+                <span id="max-amount">4.125</span> Aave
               </p>
             </div>
             <div class="deposit-interface-delimiter"></div>
             <div class="supply-token">
-              <p class="supply-txt text-2">
-                Amount to supply
-                <br>
-                4.125 Aave
-                <br>
-                $ 324
-              </p>
-              <button class="supply-button text-2 reset-button">Supply</button>
+              <input class="amount" placeholder="Desired Amount" id="wished-amount">
+              <button class="supply-button text-2 reset-button" id="supply-button">Supply</button>
             </div>
           </div>
           <div class="interface-withdraw">
-            <p class="title-2">TODO - Withdraw Interface</p>
+            <div class="token-selector">
+              <img src="../resources/images/Aave_logo.png" alt="Aave_logo" class="token-selected-logo image-small">
+              <p class="title-3 token-selected-name">Aave</p>
+              <img src="../resources/images/selector.png" alt="Selector_img" class="toggle-token-selection-button image-xsmall"></img>
+            </div>
+            <div class="wallet-balance">
+              <img src="../resources/images/alpha-white.webp" alt="Wallet_img" class="wallet-balance-img image-medium">
+              <p class="wallet-balance-txt text-1 text-center">
+                Current deposit in strategy Alpha
+                <br>
+                <span id="max-amount-alpha">4.125</span> Aave
+              </p>
+            </div>
+            <div class="deposit-interface-delimiter"></div>
+            <div class="supply-token">
+              <input class="amount" placeholder="Desired Amount" id="wished-amount-alpha">
+              <button class="supply-button text-2 reset-button" id="supply-button-alpha">Withdraw</button>
+            </div>
           </div>
         </div>
       </div>
-      <div class="box chart-box">
-        <div class="title-2">Funds distribution</div>
-        <canvas id="Distribution-Chart"></canvas>
-      </div>
     </div>
     <br>
-    <script src="/scripts/shooting_stars.js"></script>
     <script src="/scripts/animation_Strat.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="module" src="../scripts/provider.js"></script>
