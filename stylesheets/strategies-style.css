@@ -521,36 +521,3 @@ background: linear-gradient(92.88deg, rgb(55, 75, 147) 9.16%, rgb(60, 47, 150) 4
   color: red;
   font-size: .25rem;
 }
-
-.ray-of-light
- {
-  position: absolute;
-  top: 11%;
-  left: 0;
-  width: 20px;
-  height: 3px;
-  background: white;
-  opacity: 0.8;
-  animation: ray-of-light-animation 1s linear;
-}
-
-@keyframes ray-of-light-animation {
-  from {
-    transform: translateX(830px); /* Start the ray of light just off the left edge of the delimiter */
-  }
-  to {
-    transform: translateX(930px); /* Move the ray of light across the full width of the delimiter, plus an extra 30 pixels */
-  }
-}
-
-.ray-of-light2 
-{
-  position: absolute;
-  top: 18%;
-  left: 0;
-  width: 20px;
-  height: 3px;
-  opacity: 0.8;
-  background: white;
-  animation: ray-of-light-animation 1s linear;
-}

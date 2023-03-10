@@ -21,10 +21,8 @@
       </nav>
     </header>
     <div class="strategy-body">
-      <div>
-        <p class="title-1">Dashboard</p>
-        <div class="delimiter"></div>
-        <div class="delimiter2"></div>
+      <div id="needToConnect">
+        <p class="title-1" id="buttonNeedToConnect">Dashboard</p>
       </div>
       <div class="graphs">
         <div class="line-chart-box">
@@ -46,7 +44,7 @@
         <img class="paladinLogo" src="../resources/images/Paladin_finance_logo.png">
         <img class="apwineLogo" src="../resources/images/Apwine_logo.png">
         <p>Estimated APY:</p>
-        <p class="percentage">9.56%</p>
+        <p class="percentage" id="alphaAPY">9.56%</p>
         <a href="http://127.0.0.1:5500/pages/strategy-alpha.html"><button class="enter-strategie">Enter Alpha Strategie</button></a></button>
       </li>
       <li class="beta"> 
@@ -58,11 +56,8 @@
     </ul>
 </div>
     </div>
-    <script src="/scripts/animation_Strat.js"></script>
-    <script src="../scripts/graph.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script type="module" src="../scripts/provider.js"></script>
-    <script type="module" src="../scripts/strategy.js"></script>
-    <script type="module" src="../scripts/stats.js"></script>
+    <script src="../scripts/home-page/graph.js"></script>
+    <script type="module" src="../scripts/global-scope/provider.js"></script>
   </body>
 </html>
