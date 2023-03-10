@@ -29,6 +29,7 @@ async function getAccount() {
     console.log('Please connect to MetaMask.');
   } else if (accounts[0] !== activeAccount) {
     activeAccount = accounts[0];
+    ethereumButton.textContent = ("" + accounts[0]).substring(0, 10) + "..."
   }
 }
 

@@ -138,10 +138,12 @@ header {
   background: linear-gradient(92.88deg, rgb(69, 94, 181) 9.16%, rgb(86, 67, 204) 43.89%, rgb(103, 63, 215) 64.72%);
   color:white;
   z-index: 2;
-text-shadow: rgba(0, 0, 0, 0.25) 0px 3px 8px;
-transition: border 120ms  1s, background-color, color, box-shadow, opacity;
-background: linear-gradient(92.88deg, rgb(69, 94, 181) 9.16%, rgb(86, 67, 204) 43.89%, rgb(103, 63, 215) 64.72%);
-border-radius: 1rem;
+  text-shadow: rgba(0, 0, 0, 0.25) 0px 3px 8px;
+  transition: border 120ms  1s, background-color, color, box-shadow, opacity;
+  background: linear-gradient(92.88deg, rgb(69, 94, 181) 9.16%, rgb(86, 67, 204) 43.89%, rgb(103, 63, 215) 64.72%);
+  border-radius: 1rem;
+  max-width: 20%;
+  overflow:hidden;
 }
 
 .enableEthereumButton:hover {
@@ -347,9 +349,16 @@ button.deposit-button.selected, button.withdraw-button.selected {
 }
 
 .interface-deposit, .interface-withdraw {
-  display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.interface-deposit {
+  display: flex;
+}
+
+.interface-withdraw {
+  display: none; /*avoid a ghost display during page loading*/
 }
 
 .token-selector {
