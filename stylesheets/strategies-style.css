@@ -368,14 +368,10 @@ button.deposit-button.selected, button.withdraw-button.selected {
   margin-right: var(--box-vertical-margin);
 }
 
-.token-selected-logo, .toggle-token-selection-button {
+.token-selected-logo, .token-selection-button {
   display: block;
   margin-top: auto;
   margin-bottom: auto;
-}
-
-.token-selected-logo {
-  margin-left: var(--box-vertical-margin);
 }
 
 .token-selected-name {
@@ -383,9 +379,18 @@ button.deposit-button.selected, button.withdraw-button.selected {
   font-weight: bold;
 }
 
-.toggle-token-selection-button {
+.token-selection-button {
   background-color: var(--main-bg-color);
   border-radius: 50%;
+}
+
+.token-selection-button.left {
+  transform: rotate(90deg);
+  margin-left: var(--box-vertical-margin);
+}
+
+.token-selection-button.right {
+  transform: rotate(-90deg);
 }
 
 .wallet-balance {

@@ -66,13 +66,19 @@ function switchToWithdraw() {
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 const tokens_available = [
-  "tether", "usd-coin", "aave", "weth", "wrapped-bitcoin"
+  "aave", "tether", "usd-coin", "weth", "wrapped-bitcoin"
 ]
-let current_token = "aave"
+let current_token = 0
 
 const tokens_data = Object.create(null)
 const user_tokens_balance = Object.create(null)
 const user_strategy_balances = Object.create(null)
+
+const selectTokenLeft = document.querySelector('.token-selection-button.left')
+const selectTokenRight = document.querySelector('.token-selection-button.right')
+
+const tokenSelectedLogo = document.querySelector('.token-selected-logo')
+const tokenSelectedName = document.querySelector('.token-selected-name')
 
 const depositBalanceLabel = document.getElementById("wallet-deposit-token-balance")
 const depositTokenSymbol = document.getElementById("wallet-deposit-token-symbol")
@@ -82,12 +88,20 @@ const withdrawBalanceLabel = document.getElementById("wallet-withdraw-strategy-b
 const withdrawTokenSymbol = document.getElementById("wallet-withdraw-strategy-symbol")
 const withdrawBalanceWorth = document.getElementById("wallet-withdraw-strategy-worth")
 
+selectTokenLeft.addEventListener('click', () => {
+  switchWithNextToken("left")
+})
+selectTokenRight.addEventListener('click', () => {
+  switchWithNextToken("right")
+})
+
 function load_token_data(token) {
   axios.get('https://api.coingecko.com/api/v3/coins/' + token + '?tickers=false&market_data=true&community_data=false&developer_data=true&sparkline=true')
     .then(function(response) {
       const response_json = response["data"]
       console.log(response_json)
       tokens_data[token] = {
+        "name": response_json["name"],
         "symbol": response_json["symbol"],
         "description": response_json["description"]["fr"],
         "homepage": response_json["links"]["homepage"],
@@ -99,18 +113,22 @@ function load_token_data(token) {
       console.log(error)
     })
     .finally(function () {
-      if (token === current_token) {
-        switchToToken(current_token)
+      if (token === tokens_available[current_token]) {
+        switchWithNextToken("")
       }
     })
 }
 
-function switchToToken(token) {
+function switchWithNextToken(direction) {
+  current_token = nextToken(current_token, tokens_available.length, direction)
+  const token = tokens_available[current_token]
   const tokenData = tokens_data[token]
-  console.log("Token data: " + tokenData)
   const current_token_balance = user_tokens_balance[token]
   const current_strategy_balance = user_strategy_balances[token]
   
+  tokenSelectedLogo.src = tokenData["image"]
+  tokenSelectedName.textContent = tokenData["name"]
+
   depositBalanceLabel.textContent = current_token_balance
   depositTokenSymbol.textContent = tokenData["symbol"]
   depositBalanceWorth.textContent = (current_token_balance * tokenData["current_price"]).toFixed(2) + "€"
@@ -118,6 +136,14 @@ function switchToToken(token) {
   withdrawBalanceLabel.textContent = current_strategy_balance
   withdrawTokenSymbol.textContent = tokenData["symbol"]
   withdrawBalanceWorth.textContent = (current_strategy_balance * tokenData["current_price"]).toFixed(2) + "€"
+}
+
+function nextToken(tokenId, max, direction) {
+  if (direction === "left")
+    return (tokenId == 0 ? max : tokenId) - 1
+  else if (direction === "right")
+    return (tokenId + 1) % max
+  return tokenId
 }
 
 for (let token of tokens_available) {
