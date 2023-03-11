@@ -1,4 +1,3 @@
-console.log("Nani j'ai rien ici (provider) non plus !");
 import { ethers } from 'http://localhost:8080/third-party/ethers.js';
 
 // Get the provider and signer from the browser window
@@ -22,9 +21,6 @@ ethereumButton.addEventListener('click', () => {
   getAccount();
 });
 
-ethereumButton.addEventListener('click', () => {
-  connect();
-});
 
 // Get the account in the window object
 async function getAccount() {
@@ -34,7 +30,7 @@ async function getAccount() {
     console.log('Please connect to MetaMask.');
   } else if (accounts[0] !== activeAccount) {
     activeAccount = accounts[0];
-    ethereumButton.textContent = `Address: ${activeAccount}`;
+    ethereumButton.textContent = `Address: ${activeAccount.substring(0, 10)}` +`...` ;
     ethereumButton.disabled = true;
     const event = new CustomEvent('addressToCatch', { detail: activeAccount});
     window.dispatchEvent(event);

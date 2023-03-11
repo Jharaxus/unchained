@@ -22,18 +22,18 @@
     </header>
     <div class="strategy-body">
       <div id="needToConnect">
-        <p class="title-1" id="buttonNeedToConnect">Dashboard</p>
+        <p class="title-1" >Dashboard</p>
       </div>
       <div class="graphs">
         <div class="line-chart-box">
           <div class="title-2">Interest evolution</div>
-          <div>
-            <canvas id="myChart"></canvas>
-          </div>
+          <canvas id="lineGraph"></canvas>
+          <button id="buttonNotConnected"></button>
         </div>
         <div class="circular-graph-box">
           <div class="title-2">Funds distribution</div>
-          <canvas class="distribution-chart" id="Distribution-Chart"></canvas>
+          <canvas class="distribution-chart" id="pieChart"></canvas>
+          <button id="buttonNotConnected2"></button>
         </div>
       </div>
     </div>
@@ -56,8 +56,9 @@
     </ul>
 </div>
     </div>
+    <script type="module" src="../scripts/global-scope/provider.js"></script>
+    <script type="module" src="../scripts/global-scope/database.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../scripts/home-page/graph.js"></script>
-    <script type="module" src="../scripts/global-scope/provider.js"></script>
   </body>
 </html>

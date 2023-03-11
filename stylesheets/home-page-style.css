@@ -167,7 +167,6 @@ background: linear-gradient(92.88deg, rgb(55, 75, 147) 9.16%, rgb(60, 47, 150) 4
   width: 100%;
   height: 450px;
   justify-content: space-around;
-  
 }
 
 .line-chart-box{
@@ -292,3 +291,41 @@ margin-left: 50px;
   cursor: pointer;
   background: linear-gradient(92.88deg, rgb(55, 75, 147) 9.16%, rgb(60, 47, 150) 43.89%, rgb(80, 49, 165) 64.72%);
   }
+
+.buttonNotConnected,
+.buttonNotConnected2{
+  align-self: center;
+  font-size: 17px;
+  position: absolute;
+  top: 50%;
+  width: 6rem;
+  height: 1rem;
+  text-align: center;
+  color: rgb(170, 170, 170);;
+  background: transparent;
+  font-weight: bold;
+  border-color: rgb(114, 113, 113);
+  border-style: solid;
+  border-radius: 1rem;
+}
+
+.buttonNotConnected:hover,
+.buttonNotConnected2:hover {
+  cursor: pointer;
+  color: rgb(138, 138, 138);;
+  border-color: rgb(77, 77, 77);
+}
+
+.pElement{
+  align-self: center;
+  font-size: 17px;
+  position: absolute;
+  top: 54%;
+  width: 6rem;
+  height: 1rem;
+  text-align: center;
+  color: rgb(170, 170, 170);;
+  background: transparent;
+  font-weight: bold;
+  border-style: none;
+}
