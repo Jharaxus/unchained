@@ -17,7 +17,7 @@ const inputAlpha = document.getElementById('wished-amount-alpha');
 inputAlpha.addEventListener('keydown', validateInput);
 
 const supplyButton = document.getElementById("supply-button");
-const maxAmount = document.getElementById("max-amount").textContent;
+const maxAmount = document.getElementById("wallet-deposit-token-balance").textContent;
 const wishedAmount = document.getElementById("wished-amount");
 const deposit = document.querySelector('.interface-deposit');
 const errorMessage = document.createElement("p");
@@ -39,7 +39,7 @@ supplyButton.addEventListener("click", function() {
 });
 
 const supplyButtonAlpha = document.getElementById("supply-button-alpha");
-const maxAmountAlpha = document.getElementById("max-amount-alpha").textContent;
+const maxAmountAlpha = document.getElementById("wallet-withdraw-strategy-balance").textContent;
 const wishedAmountAlpha = document.getElementById("wished-amount-alpha");
 const withdraw = document.querySelector('.interface-withdraw');
 const errorMessageAlpha = document.createElement("p");
