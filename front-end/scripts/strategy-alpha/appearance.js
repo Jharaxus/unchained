@@ -131,11 +131,18 @@ function switchWithNextToken(direction) {
 
   depositBalanceLabel.textContent = current_token_balance
   depositTokenSymbol.textContent = tokenData["symbol"]
-  depositBalanceWorth.textContent = (current_token_balance * tokenData["current_price"]).toFixed(2) + "€"
+  console.log("tout fonctionne pour l'instant");
+  const valueDepositBalanceWorth = (current_token_balance * tokenData["current_price"]).toFixed(2);
+  depositBalanceWorth.textContent = "worth: " + valueDepositBalanceWorth + "€";
+  const depositBalanceWorthSend = new CustomEvent('depositBalanceWorthSend', { detail: valueDepositBalanceWorth});
+  window.dispatchEvent(depositBalanceWorthSend);
 
-  withdrawBalanceLabel.textContent = current_strategy_balance
-  withdrawTokenSymbol.textContent = tokenData["symbol"]
-  withdrawBalanceWorth.textContent = (current_strategy_balance * tokenData["current_price"]).toFixed(2) + "€"
+  withdrawBalanceLabel.textContent = current_strategy_balance;
+  withdrawTokenSymbol.textContent = tokenData["symbol"];
+  const valueWithdrawBalanceWorth = (current_strategy_balance * tokenData["current_price"]).toFixed(2);
+  withdrawBalanceWorth.textContent = "worth: " + valueWithdrawBalanceWorth + "€";
+  const withdrawBalanceWorthSend = new CustomEvent('withdrawBalanceWorthSend', { detail: valueWithdrawBalanceWorth});
+  window.dispatchEvent(withdrawBalanceWorthSend);
 }
 
 function nextToken(tokenId, max, direction) {
