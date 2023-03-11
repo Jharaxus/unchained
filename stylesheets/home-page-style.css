@@ -199,8 +199,6 @@ background: linear-gradient(92.88deg, rgb(55, 75, 147) 9.16%, rgb(60, 47, 150) 4
   flex-wrap: wrap;
   justify-content: space-around;
   align-content: flex-start;
-  /*background:
-  no-repeat url(../resources/images/landing-page/fond_nebuleux.png) center / 200% 200%;*/
 }
 
 .alpha,
