@@ -10,4 +10,4 @@ Finnaly, run the following commands:
 
 > http-server
 
-The web application can be found at `http://localhost:8080/pages/home.html`
+The web application can be found at `http://localhost:8080/pages/landing-page.html`
