@@ -5,7 +5,7 @@ Blockchain-backend of the Unchained App
 To run this backend locally, you first have to download the foundry tools.
 > This can be done by following the steps described [here](https://book.getfoundry.sh/getting-started/installation)
 
-Once foundry is setup, run the following commands to load the project:
+Once foundry is setup, run the following command to load the project:
 > forge install
 
 At this point, running `forge install` should succeed without any error.
@@ -13,7 +13,7 @@ At this point, running `forge install` should succeed without any error.
 ## Running the tests
 To run the tests locally, simply run `forge test`
 
-## Deploying the smart conctracts locally
+## Deploying the smart contracts locally
 ### Deploying a local blockchain
 First, you need to start `anvil` which is a tool that emulates a blockchain directly on your computer.
 
@@ -32,7 +32,7 @@ PRIVATE_KEY=ONE_OF_THE_PRIVATE_KEYS_GIVEN_BY_ANVIL
 PUBLIC_KEY=THE_ASSOCIATED_PUBLIC_KEY
 ```
 Then, you can deploy any contract in the **src/** folder by running its corresponding script located in the **script/** folder:
-> forge script script/SCRIPT_PATH:SCRIPT_CONTRACT_NAME --fork-url http://localhost:*port_number_of_anvil* --broadcast
+> forge script script/SCRIPT_PATH:SCRIPT_CONTRACT_NAME --fork-url http://localhost:port_number_of_anvil --broadcast
 
-For example, if you want to deploy the **AlphaStrategyVault** contract and `anvil` is listening tour your port **8545**, run the following command:
+For example, if you want to deploy the **AlphaStrategyVault** contract and `anvil` is listening to your port **8545**, run the following command:
 > forge script script/strategies/AlphaStrategyVault.s.sol:AlphaStrategyVaultScript --fork-url http://localhost:8545 --broadcast
