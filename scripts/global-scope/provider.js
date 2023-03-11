@@ -21,6 +21,7 @@ ethereumButton.addEventListener('click', () => {
   getAccount();
 });
 
+
 // Get the account in the window object
 async function getAccount() {
   const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
@@ -29,9 +30,11 @@ async function getAccount() {
     console.log('Please connect to MetaMask.');
   } else if (accounts[0] !== activeAccount) {
     activeAccount = accounts[0];
-    ethereumButton.textContent = ("" + accounts[0]).substring(0, 10) + "..."
+    ethereumButton.textContent = `Address: ${activeAccount.substring(0, 10)}` +`...` ;
+    ethereumButton.disabled = true;
+    const event = new CustomEvent('addressToCatch', { detail: activeAccount});
+    window.dispatchEvent(event);
   }
 }
-
 // Update the selected account and chain id on change
 ethereum.on('accountsChanged', getAccount);
