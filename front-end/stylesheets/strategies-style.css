@@ -615,13 +615,6 @@ background: linear-gradient(92.88deg, rgb(55, 75, 147) 9.16%, rgb(60, 47, 150) 4
   margin-bottom: auto;
 }
 
-.operation.delegate .line {
-  background: linear-gradient(to right, rgba(114, 224, 86, 0.402), rgb(2, 9, 26));
-}
-
-.operation.completed .line {
-}
-
 .state-operations-words{
   visibility: hidden;
   z-index: 2;
@@ -637,6 +630,7 @@ background: linear-gradient(92.88deg, rgb(55, 75, 147) 9.16%, rgb(60, 47, 150) 4
 }
 
 .approval-word{
+  color: rgb(77, 77, 77);
   display: flex;
   padding-left: 9.5%;
   flex-direction: row;
