@@ -12,15 +12,16 @@ contract DummyAave is ERC20 {
     }
 }
 
-contract DummyStakedAave is IStakedAave {
+contract DummyStakedAave is IStakedAave, ERC20 {
     ERC20 aave;
 
-    constructor(address _aave) {
+    constructor(address _aave) ERC20("dummy stake aave", "dstkaave", ERC20(_aave).decimals()) {
         aave = ERC20(_aave);
     }
 
     function stake(address to, uint256 amount) external {
         aave.transferFrom(to, address(this), amount);
+        _mint(to, amount);
     }
 
     function redeem(address to, uint256 amount) external {
@@ -57,7 +58,7 @@ contract AlphaStrategyProcessorTest is Test {
         processor.processDepositStakeAave(100);
         processor.processWithdrawStakeAave(address(this), 100);
 
-        assertEq(aave.balanceOf(address(processor)), 100);
-        assertEq(aave.balanceOf(address(stakedAave)), 0);
+        assertEq(stakedAave.balanceOf(address(processor)), 0);
+        assertEq(stakedAave.balanceOf(address(this)), 100);
     }
 }

@@ -18,18 +18,22 @@ contract DummyProcessor is StrategyProcessor {
         depositAmount += amount;
     }
 
-    function _processWithdraw(address to, uint256 assets, uint256 shares) internal virtual override {
+    function _processWithdraw(address to, uint256 assets, uint256 shares)
+        internal
+        virtual
+        override
+        returns (address, uint256)
+    {
         withdrawTo = to;
         withdrawAssets = assets;
         withdrawShares = shares;
         startingAsset.transfer(to, assets);
+        return (address(startingAsset), assets);
     }
 
     function totalAssets() public view virtual override returns (uint256) {
         return startingAsset.balanceOf(address(this));
     }
-
-    function completeWithdraw(address) public override {}
 }
 
 contract DummyERC20 is ERC20 {
@@ -165,11 +169,9 @@ contract StrategyVaultTest is Test {
 
         vault.withdraw(250, address(this), address(this));
 
-        assertEq(processor.withdrawTo(), address(vault));
-        assertEq(processor.withdrawAssets(), 50);
-        assertEq(vault.balanceOf(address(this)), 50);
-        assertEq(token.balanceOf(address(this)), 250);
+        assertEq(vault.balanceOf(address(this)), 100);
+        assertEq(token.balanceOf(address(this)), 200);
         assertEq(token.balanceOf(address(vault)), 0);
-        assertEq(token.balanceOf(address(processor)), 250);
+        assertEq(token.balanceOf(address(processor)), 300);
     }
 }

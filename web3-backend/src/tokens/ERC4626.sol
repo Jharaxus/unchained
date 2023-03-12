@@ -1,8 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 pragma solidity >=0.8.0;
 
-import {ERC20} from "../third-party/ERC20.sol";
-// import {SafeTransferLib} from "solmate/utils/SafeTransferLib.sol";
+// import {ERC20} from "../third-party/ERC20.sol";
+import {SafeTransferLib} from "solmate/utils/SafeTransferLib.sol";
+import {ERC20} from "solmate/tokens/ERC20.sol";
 import {FixedPointMathLib} from "solmate/utils/FixedPointMathLib.sol";
 
 /// ERC4626 implementation adapted from solmate version (https://github.com/transmissions11/solmate/blob/main/src/mixins/ERC4626.sol)
@@ -69,14 +70,17 @@ abstract contract ERC4626 is ERC20 {
 
         //     if (allowed != type(uint256).max) allowance[owner][msg.sender] = allowed - shares;
         // }
+        address addr;
+        uint256 amount;
+        (addr, amount) = beforeWithdraw(assets, shares, owner);
 
-        beforeWithdraw(assets, shares, owner);
+        shares = previewWithdraw(amount);
 
         _burn(owner, shares);
 
         emit Withdraw(msg.sender, receiver, owner, assets, shares);
 
-        asset.transfer(receiver, assets);
+        ERC20(addr).transfer(receiver, amount);
     }
 
     function redeem(uint256 shares, address receiver, address owner) public virtual returns (uint256 assets) {
@@ -89,13 +93,15 @@ abstract contract ERC4626 is ERC20 {
         // Check for rounding error since we round down in previewRedeem.
         require((assets = previewRedeem(shares)) != 0, "ZERO_ASSETS");
 
-        beforeWithdraw(assets, shares, owner);
+        address addr;
+        uint256 amount;
+        (addr, amount) = beforeWithdraw(assets, shares, owner);
 
         _burn(owner, shares);
 
         emit Withdraw(msg.sender, receiver, owner, assets, shares);
 
-        asset.transfer(receiver, assets);
+        ERC20(addr).transfer(receiver, amount);
     }
 
     /*//////////////////////////////////////////////////////////////
@@ -105,13 +111,13 @@ abstract contract ERC4626 is ERC20 {
     function totalAssets() public view virtual returns (uint256);
 
     function convertToShares(uint256 assets) public view virtual returns (uint256) {
-        uint256 supply = totalSupply(); // Saves an extra SLOAD if totalSupply is non-zero.
+        uint256 supply = totalSupply; // Saves an extra SLOAD if totalSupply is non-zero.
 
         return supply == 0 ? assets : assets.mulDivDown(supply, totalAssets());
     }
 
     function convertToAssets(uint256 shares) public view virtual returns (uint256) {
-        uint256 supply = totalSupply(); // Saves an extra SLOAD if totalSupply is non-zero.
+        uint256 supply = totalSupply; // Saves an extra SLOAD if totalSupply is non-zero.
 
         return supply == 0 ? shares : shares.mulDivDown(totalAssets(), supply);
     }
@@ -121,13 +127,13 @@ abstract contract ERC4626 is ERC20 {
     }
 
     function previewMint(uint256 shares) public view virtual returns (uint256) {
-        uint256 supply = totalSupply(); // Saves an extra SLOAD if totalSupply is non-zero.
+        uint256 supply = totalSupply; // Saves an extra SLOAD if totalSupply is non-zero.
 
         return supply == 0 ? shares : shares.mulDivUp(totalAssets(), supply);
     }
 
     function previewWithdraw(uint256 assets) public view virtual returns (uint256) {
-        uint256 supply = totalSupply(); // Saves an extra SLOAD if totalSupply is non-zero.
+        uint256 supply = totalSupply; // Saves an extra SLOAD if totalSupply is non-zero.
 
         return supply == 0 ? assets : assets.mulDivUp(supply, totalAssets());
     }
@@ -149,18 +155,25 @@ abstract contract ERC4626 is ERC20 {
     }
 
     function maxWithdraw(address owner) public view virtual returns (uint256) {
-        return convertToAssets(balanceOf(owner));
+        return convertToAssets(balanceOf[owner]);
     }
 
     function maxRedeem(address owner) public view virtual returns (uint256) {
-        return balanceOf(owner);
+        return balanceOf[owner];
     }
 
     /*//////////////////////////////////////////////////////////////
                           INTERNAL HOOKS LOGIC
     //////////////////////////////////////////////////////////////*/
 
-    function beforeWithdraw(uint256 assets, uint256 shares, address ownerOfDeposit) internal virtual {}
+    /**
+     * returns address of new token to withdraw, amount to withdraw
+     */
+    function beforeWithdraw(uint256 assets, uint256 shares, address ownerOfDeposit)
+        internal
+        virtual
+        returns (address, uint256)
+    {}
 
     function afterDeposit(uint256 assets, uint256 shares, address receiver) internal virtual {}
 }

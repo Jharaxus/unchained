@@ -47,10 +47,6 @@ contract StrategyVault is ERC4626, Owned {
         processorSetup = true;
     }
 
-    function completeWithdraw(address to) public {
-        processor.completeWithdraw(to);
-    }
-
     function totalAssets() public view virtual override returns (uint256) {
         require(processorSetup, "Owner must first setup the processor");
         return asset.balanceOf(address(this)) + processor.totalAssets();
@@ -64,17 +60,21 @@ contract StrategyVault is ERC4626, Owned {
         }
     }
 
-    function beforeWithdraw(uint256 assets, uint256 shares, address receiver) internal override {
+    function beforeWithdraw(uint256 assets, uint256 shares, address receiver)
+        internal
+        override
+        returns (address, uint256)
+    {
         require(processorSetup, "Owner must first setup the processor");
         if (stalledAssets[receiver].lastBatchDepositId == lastBatchDepositId) {
-            uint256 assetsDeposited =
-                assets > stalledAssets[receiver].amount ? assets - stalledAssets[receiver].amount : 0;
-            if (assetsDeposited > 0) {
-                uint256 sharesDeposited = previewWithdraw(assetsDeposited);
-                processor.processWithdraw(address(this), assetsDeposited, sharesDeposited);
+            uint256 amountStalled = stalledAssets[receiver].amount;
+            if (amountStalled > 0) {
+                return (address(asset), amountStalled > assets ? assets : amountStalled);
+            } else {
+                return processor.processWithdraw(address(this), assets, shares);
             }
         } else {
-            processor.processWithdraw(address(this), assets, shares);
+            return processor.processWithdraw(address(this), assets, shares);
         }
     }
 }
