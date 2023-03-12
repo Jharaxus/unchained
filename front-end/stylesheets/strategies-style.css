@@ -732,6 +732,7 @@ background: linear-gradient(92.88deg, rgb(55, 75, 147) 9.16%, rgb(60, 47, 150) 4
   display: block;
   margin-top: auto;
   margin-bottom: auto;
+  background-color: rgb(77, 77, 77);
 }
 
 .state-operations-words-deposit{
@@ -749,6 +750,7 @@ background: linear-gradient(92.88deg, rgb(55, 75, 147) 9.16%, rgb(60, 47, 150) 4
 }
 
 .approval-word-deposit{
+  color: rgb(77, 77, 77);
   display: flex;
   padding-left: 9.5%;
   flex-direction: row;

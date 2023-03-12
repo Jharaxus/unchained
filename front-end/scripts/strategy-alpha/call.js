@@ -6,6 +6,10 @@ const dotRightDeposit2 = document.querySelector('.dot.right-deposit2');
 const lineDeposit1 = document.querySelector('.line-deposit1');
 const lineDeposit2 = document.querySelector('.line-deposit2');
 
+const approvalWordDeposit = document.querySelector('.approval-word-deposit');
+const delegateWordDeposit = document.querySelector('.delegate-word-deposit');
+const completedWordDeposit = document.querySelector('.completed-word-deposit');
+
 
 const web3 = new Web3(Web3.givenProvider);
 
@@ -160,12 +164,15 @@ window.addEventListener('withdrawButtonActivated', () =>{
     console.log("connected to smart contract");
   }
   activatContract();
-});*/
+});
 
 window.addEventListener('DepositButtonActivated', () =>{
   dotLeftDeposit.style.borderColor = 'green';
   dotRightDeposit1.style.borderColor = 'green';
   dotRightDeposit2.style.borderColor = 'green';
-  lineDeposit1.style.backgroundColor = 'background: linear-gradient(to right, rgba(114, 224, 86, 0.402), rgb(2, 9, 26))'
-  lineDeposit2.style.backgroundColor = 'background: linear-gradient(to right, rgba(114, 224, 86, 0.402), rgb(2, 9, 26))'
-});
+  lineDeposit1.style.background = 'linear-gradient(to right, rgba(114, 224, 86, 0.402), rgb(2, 9, 26))';
+  lineDeposit2.style.background = 'linear-gradient(to right, rgba(114, 224, 86, 0.402), rgb(2, 9, 26))';
+  approvalWordDeposit.style.color = 'snow';
+  delegateWordDeposit.style.color = 'snow';
+  completedWordDeposit.style.color = 'snow';
+});*/
