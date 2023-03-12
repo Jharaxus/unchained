@@ -713,7 +713,7 @@ background: linear-gradient(92.88deg, rgb(55, 75, 147) 9.16%, rgb(60, 47, 150) 4
   border-style: solid;
 }
 
-.delegate .dot.right-deposi1 {
+.delegate .dot.right-deposit1 {
   border-color: rgb(103, 63, 215);
   border-width: 3px;
   border-style: solid;}
@@ -732,10 +732,6 @@ background: linear-gradient(92.88deg, rgb(55, 75, 147) 9.16%, rgb(60, 47, 150) 4
   display: block;
   margin-top: auto;
   margin-bottom: auto;
-}
-
-.operation.delegate .line-deposit1 {
-  background: linear-gradient(to right, rgba(114, 224, 86, 0.402), rgb(2, 9, 26));
 }
 
 .state-operations-words-deposit{
