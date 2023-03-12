@@ -407,6 +407,8 @@ button.deposit-button.selected, button.withdraw-button.selected {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
   width: var(--box-large-width);
 }
 
@@ -429,6 +431,7 @@ button.deposit-button.selected, button.withdraw-button.selected {
   border-color: white;
   color: white;
   margin-bottom: 20px;
+  border-width: 1px;
   border-style: solid;
   text-align: center;
 }
@@ -440,6 +443,7 @@ button.deposit-button.selected, button.withdraw-button.selected {
   align-items: center;
   width: var(--box-large-width);
   margin-top: var(--box-vertical-margin);
+  padding-top: 20px;
 }
 
 .supply-txt {
@@ -452,6 +456,7 @@ button.supply-button {
   color: var(--box-bg-color);
   border-radius: var(--box-border-radius);
   font-weight: bold;
+  font-size: .3rem;
   background: linear-gradient(92.88deg, rgb(69, 94, 181) 9.16%, rgb(86, 67, 204) 43.89%, rgb(103, 63, 215) 64.72%);
   margin-bottom: 20px;
 }
@@ -534,4 +539,236 @@ background: linear-gradient(92.88deg, rgb(55, 75, 147) 9.16%, rgb(60, 47, 150) 4
   text-align: center;
   color: red;
   font-size: .25rem;
+}
+
+.state-operations{
+  visibility: hidden;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-content: center;
+  width: 80%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  height: 1em;
+}
+
+.approval{
+  display: flex;
+  flex-direction: row;
+}
+
+.delegate,
+.completed{
+  display: flex;
+  flex-direction: row;
+}
+
+.delegate{
+  width: 40%;
+}
+
+.completed{
+  width: 40%;
+}
+
+.operation .dot {
+  height: .5em;
+  width: .5em;
+  display: block;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.operation .dot.left {
+  border-radius: 50%;
+}
+
+.operation .dot.right {
+  border-radius: 50%;
+}
+
+.approval .dot.left {
+  border-color: rgb(103, 63, 215);
+  border-width: 3px;
+  border-style: solid;
+}
+
+.delegate .dot.right {
+  border-color: rgb(103, 63, 215);
+  border-width: 3px;
+  border-style: solid;}
+
+.completed .dot.right {
+  border-color: rgb(103, 63, 215);
+  border-width: 3px;
+  border-style: solid;
+}
+
+.operation .line {
+  width: 88%;
+  height: .1em;
+  display: block;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.operation.delegate .line {
+  background: linear-gradient(to right, rgba(114, 224, 86, 0.402), rgb(2, 9, 26));
+}
+
+.operation.completed .line {
+}
+
+.state-operations-words{
+  visibility: hidden;
+  z-index: 2;
+  display: flex;
+  font-size: 0.3em;
+  justify-content: center;
+  flex-direction: row;
+  align-content: space-between;
+  width: 90%;
+  margin-bottom: 40px;
+  height: 1em;
+  text-align: center;
+}
+
+.approval-word{
+  display: flex;
+  padding-left: 9.5%;
+  flex-direction: row;
+  width: 20%;
+}
+.delegate-word{
+  color: rgb(77, 77, 77);
+  display: flex;
+  padding-left: 26%;
+  flex-direction: row;
+  width: 40%;
+}
+.completed-word{
+  color: rgb(77, 77, 77);
+  display: flex;
+  padding-left: 14%;
+  flex-direction: row;
+  width: 40%;
+}
+
+
+
+
+
+.state-operations-deposit{
+  visibility: hidden;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-content: center;
+  width: 80%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  height: 1em;
+}
+
+.approval-deposit{
+  display: flex;
+  flex-direction: row;
+}
+
+.delegate-deposit,
+.completed-deposit{
+  display: flex;
+  flex-direction: row;
+}
+
+.delegate-deposit{
+  width: 40%;
+}
+
+.completed-deposit{
+  width: 40%;
+}
+
+.operation .dot {
+  height: .5em;
+  width: .5em;
+  display: block;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.operation .dot.left-deposit, 
+.operation .dot.right-deposit1, 
+.operation .dot.right-deposit2
+ {
+  border-radius: 50%;
+}
+
+.approval .dot.left-deposit {
+  border-color: rgb(103, 63, 215);
+  border-width: 3px;
+  border-style: solid;
+}
+
+.delegate .dot.right-deposi1 {
+  border-color: rgb(103, 63, 215);
+  border-width: 3px;
+  border-style: solid;}
+
+.completed .dot.right-deposit2 {
+  border-color: rgb(103, 63, 215);
+  border-width: 3px;
+  border-style: solid;
+}
+
+.operation .line-deposit1, 
+.operation .line-deposit2
+ {
+  width: 88%;
+  height: .1em;
+  display: block;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.operation.delegate .line-deposit1 {
+  background: linear-gradient(to right, rgba(114, 224, 86, 0.402), rgb(2, 9, 26));
+}
+
+.state-operations-words-deposit{
+  visibility: hidden;
+  z-index: 2;
+  display: flex;
+  font-size: 0.3em;
+  justify-content: center;
+  flex-direction: row;
+  align-content: space-between;
+  width: 90%;
+  margin-bottom: 40px;
+  height: 1em;
+  text-align: center;
+}
+
+.approval-word-deposit{
+  display: flex;
+  padding-left: 9.5%;
+  flex-direction: row;
+  width: 20%;
+}
+.delegate-word-deposit{
+  color: rgb(77, 77, 77);
+  display: flex;
+  padding-left: 26%;
+  flex-direction: row;
+  width: 40%;
+}
+.completed-word-deposit{
+  color: rgb(77, 77, 77);
+  display: flex;
+  padding-left: 14%;
+  flex-direction: row;
+  width: 40%;
 }

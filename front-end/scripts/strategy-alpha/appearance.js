@@ -118,20 +118,21 @@ function load_token_data(token) {
       }
     })
 }
+var tokenDataSaviorPrice;
 
 function switchWithNextToken(direction) {
   current_token = nextToken(current_token, tokens_available.length, direction)
   const token = tokens_available[current_token]
   const tokenData = tokens_data[token]
+  tokenDataSaviorPrice = tokenData["current_price"];
   const current_token_balance = user_tokens_balance[token]
-  const current_strategy_balance = user_strategy_balances[token]
+  var current_strategy_balance = user_strategy_balances[token]
   
   tokenSelectedLogo.src = tokenData["image"]
   tokenSelectedName.textContent = tokenData["name"]
 
   depositBalanceLabel.textContent = current_token_balance
   depositTokenSymbol.textContent = tokenData["symbol"]
-  console.log("tout fonctionne pour l'instant");
   const valueDepositBalanceWorth = (current_token_balance * tokenData["current_price"]).toFixed(2);
   depositBalanceWorth.textContent = "worth: " + valueDepositBalanceWorth + "€";
   const depositBalanceWorthSend = new CustomEvent('depositBalanceWorthSend', { detail: valueDepositBalanceWorth});
@@ -155,6 +156,15 @@ function nextToken(tokenId, max, direction) {
 
 for (let token of tokens_available) {
   load_token_data(token)
-  user_tokens_balance[token] = 10
-  user_strategy_balances[token] = 3
+  user_tokens_balance[token] = 0
+  user_strategy_balances[token] = 0
 }
+
+
+window.addEventListener('UpdateDeposit', function(event) {
+  getBalance().then(function (result) {
+    const valueWithdrawBalanceWorth = (result * tokenDataSaviorPrice).toFixed(2);
+    depositBalanceWorth.textContent = "worth: " + valueWithdrawBalanceWorth + "€"; 
+    const withdrawBalanceWorthSend = new CustomEvent('depositBalanceWorthSend', { detail: valueWithdrawBalanceWorth});
+    window.dispatchEvent(withdrawBalanceWorthSend); });
+});

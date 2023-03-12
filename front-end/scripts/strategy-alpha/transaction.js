@@ -19,18 +19,19 @@ var maxAmountWithdraw;
 var maxAmountDeposit;
 
 window.addEventListener('depositBalanceWorthSend', function(event) {
-  console.log("deposit catch validé");
   maxAmountDeposit = event.detail;
 });
 
 window.addEventListener('withdrawBalanceWorthSend', function(event) {
-  console.log("withdraw catch validé");
   maxAmountWithdraw = event.detail;
 });
 
 const deposit = document.querySelector('.interface-deposit');
 const errorMessageDeposit = document.createElement("p");
 var messageToEraseDeposit = false;
+var messageToEraseWithdraw = false;
+const stateOperationsDeposit = document.getElementById("state-operations-deposit");
+const stateOperationsWordsDeposit = document.getElementById("state-operations-words-deposit");
 
 supplyButton.addEventListener("click", function() {
   if (parseFloat(inputDeposit.value) > parseFloat(maxAmountDeposit)) {
@@ -41,15 +42,23 @@ supplyButton.addEventListener("click", function() {
     messageToEraseDeposit = true;
     }
   }
-  else if (messageToEraseDeposit) {
-    deposit.removeChild(errorMessageDeposit);
-    messageToEraseDeposit = false;
+  else {
+    if (messageToEraseDeposit) {
+      deposit.removeChild(errorMessageDeposit);
+      messageToEraseDeposit = false;
+    }
+    stateOperationsWordsDeposit.style.visibility = "visible";
+    stateOperationsDeposit.style.visibility = "visible";
+    const depositButtonActivated = new Event('DepositButtonActivated');
+    window.dispatchEvent(depositButtonActivated);
   }
 });
 
 const withdraw = document.querySelector('.interface-withdraw');
 const errorMessageWithdraw = document.createElement("p");
 var messageToEraseWithdraw = false;
+const stateOperations = document.getElementById("state-operations");
+const stateOperationsWords = document.getElementById("state-operations-words");
 
 withdrawButton.addEventListener("click", function() {
   if (parseFloat(inputWithdraw.value) > parseFloat(maxAmountWithdraw)) {
@@ -60,8 +69,15 @@ withdrawButton.addEventListener("click", function() {
     messageToEraseWithdraw = true;
     }
   }
-  else if (messageToEraseWithdraw) {
+  else {
+    if (messageToEraseWithdraw) {
     withdraw.removeChild(errorMessageWithdraw);
     messageToEraseWithdraw = false;
+    }
+    stateOperationsWords.style.visibility = "visible";
+    stateOperations.style.visibility = "visible";
+    const withdrawbuttonActivated = new Event('withdrawButtonActivated');
+    window.dispatchEvent(withdrawbuttonActivated);
   }
 });
+

@@ -80,7 +80,9 @@
               <p class="wallet-balance-txt text-1 text-center">
                 Wallet-balance
                 <br>
+                <br>
                 <span id="wallet-deposit-token-balance">xxx</span> <span id="wallet-deposit-token-symbol">xxx</span>
+                <br>
                 <br>
                 <span id="wallet-deposit-token-worth">xxx</span>
               </p>
@@ -90,14 +92,34 @@
               <input class="amount" placeholder="Desired Amount (in €)" id="wished-amount-deposit">
               <button class="supply-button text-2 reset-button" id="supply-button">Supply</button>
             </div>
+            <div class="state-operations-deposit" id="state-operations-deposit">
+              <div class="operation approval">
+                <span class="dot left-deposit"></span>
+              </div>
+              <div class="operation delegate">
+                <span class="line-deposit1"></span>
+                <span class="dot right-deposit1"></span>
+              </div>
+              <div class="operation completed">
+                <span class="line-deposit2"></span>
+                <span class="dot right-deposit2"></span>
+              </div>
+            </div>
+            <div class="state-operations-words-deposit" id="state-operations-words-deposit">
+                <span class="approval-word-deposit">Approval</span>
+                <span class="delegate-word-deposit">Delegate</span>
+                <span class="completed-word-deposit">Completed</span>
+            </div>
           </div>
           <div class="interface-withdraw">
             <div class="wallet-balance">
               <img src="../resources/images/alpha-white.webp" alt="Wallet_img" class="wallet-balance-img image-medium">
               <p class="wallet-balance-txt text-1 text-center">
-                Current deposit
+                Current deposit :
+                <br>
                 <br>
                 <span id="wallet-withdraw-strategy-balance">xxx</span> <span id="wallet-withdraw-strategy-symbol">xxx</span>
+                <br>
                 <br>
                 <span id="wallet-withdraw-strategy-worth">xxx</span>
               </p>
@@ -107,7 +129,24 @@
               <input class="amount" placeholder="Desired Amount (in €)" id="wished-amount-withdraw">
               <button class="supply-button text-2 reset-button" id="withdraw-button">Withdraw</button>
             </div>
-          </div>
+            <div class="state-operations" id="state-operations">
+              <div class="operation approval">
+                <span class="dot left"></span>
+              </div>
+              <div class="operation delegate">
+                <span class="line"></span>
+                <span class="dot right"></span>
+              </div>
+              <div class="operation completed">
+                <span class="line"></span>
+                <span class="dot right"></span>
+              </div>
+            </div>
+            <div class="state-operations-words" id="state-operations-words">
+                <span class="approval-word">Approval</span>
+                <span class="delegate-word">Delegate</span>
+                <span class="completed-word">Completed</span>
+            </div>
         </div>
       </div>
     </div>
@@ -116,5 +155,8 @@
     <script type="module" src="../scripts/global-scope/provider.js"></script>
     <script type="module" src="../scripts/strategy-alpha/appearance.js"></script>
     <script src="../scripts/strategy-alpha/transaction.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
+    <script src="../scripts/strategy-alpha/call.js"></script>
+    <!--<script type="module" src="../scripts/global-scope/add-custom-chain.js"></script>-->
   </body>
 </html>
