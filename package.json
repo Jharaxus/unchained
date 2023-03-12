@@ -1,0 +1,22 @@
+{
+  "name": "unchained",
+  "version": "1.0.0",
+  "description": "",
+  "main": "web3-backend/server/index.js",
+  "scripts": {
+    "start": "node web3-backend/server/index.js"
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jharaxus/unchained/issues"
+  },
+  "homepage": "https://github.com/Jharaxus/unchained#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "fs": "^0.0.1-security"
+  }
+}

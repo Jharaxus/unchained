@@ -119,29 +119,12 @@ async function connect() {
         lineData: [0, 0, 0, 0, 0, 0]
       })
       .then(() => {
-        /*alert("Data added successfully!")*/
       })
       .catch((error) => {
           alert(error)
       });
     }
   })
-  /*if (result) {
-    distributionData.datasets[0].data = result.data;
-    new Chart(distributionChart, {
-      type: 'pie',
-      data: distributionData,
-    });
-    config.data.labels = lineLabels;
-    config.data.datasets[0].data = result.lineData;
-    new Chart(ctx, config);
-  }  else {
-    const data = {
-      pieData: [0, 0, 0],
-      lineData: [0, 0, 0, 0, 0, 0]
-    };
-    await set(ethereumAddress, data);
-  }*/
 }
 
 
