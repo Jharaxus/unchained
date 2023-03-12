@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 pragma solidity >=0.8.0;
 
-import {ERC20} from "solmate/tokens/ERC20.sol";
-import {SafeTransferLib} from "solmate/utils/SafeTransferLib.sol";
+import {ERC20} from "../third-party/ERC20.sol";
+// import {SafeTransferLib} from "solmate/utils/SafeTransferLib.sol";
 import {FixedPointMathLib} from "solmate/utils/FixedPointMathLib.sol";
 
 /// ERC4626 implementation adapted from solmate version (https://github.com/transmissions11/solmate/blob/main/src/mixins/ERC4626.sol)
 abstract contract ERC4626 is ERC20 {
-    using SafeTransferLib for ERC20;
+    // using SafeTransferLib for ERC20;
     using FixedPointMathLib for uint256;
 
     /*//////////////////////////////////////////////////////////////
@@ -39,7 +39,7 @@ abstract contract ERC4626 is ERC20 {
         require((shares = previewDeposit(assets)) != 0, "ZERO_SHARES");
 
         // Need to transfer before minting or ERC777s could reenter.
-        asset.safeTransferFrom(msg.sender, address(this), assets);
+        asset.transferFrom(msg.sender, address(this), assets);
 
         _mint(receiver, shares);
 
@@ -52,7 +52,7 @@ abstract contract ERC4626 is ERC20 {
         assets = previewMint(shares); // No need to check for rounding error, previewMint rounds up.
 
         // Need to transfer before minting or ERC777s could reenter.
-        asset.safeTransferFrom(msg.sender, address(this), assets);
+        asset.transferFrom(msg.sender, address(this), assets);
 
         _mint(receiver, shares);
 
@@ -64,11 +64,11 @@ abstract contract ERC4626 is ERC20 {
     function withdraw(uint256 assets, address receiver, address owner) public virtual returns (uint256 shares) {
         shares = previewWithdraw(assets); // No need to check for rounding error, previewWithdraw rounds up.
 
-        if (msg.sender != owner) {
-            uint256 allowed = allowance[owner][msg.sender]; // Saves gas for limited approvals.
+        // if (msg.sender != owner) {
+        //     uint256 allowed = allowance[owner][msg.sender]; // Saves gas for limited approvals.
 
-            if (allowed != type(uint256).max) allowance[owner][msg.sender] = allowed - shares;
-        }
+        //     if (allowed != type(uint256).max) allowance[owner][msg.sender] = allowed - shares;
+        // }
 
         beforeWithdraw(assets, shares, owner);
 
@@ -76,15 +76,15 @@ abstract contract ERC4626 is ERC20 {
 
         emit Withdraw(msg.sender, receiver, owner, assets, shares);
 
-        asset.safeTransfer(receiver, assets);
+        asset.transfer(receiver, assets);
     }
 
     function redeem(uint256 shares, address receiver, address owner) public virtual returns (uint256 assets) {
-        if (msg.sender != owner) {
-            uint256 allowed = allowance[owner][msg.sender]; // Saves gas for limited approvals.
+        // if (msg.sender != owner) {
+        //     uint256 allowed = allowance[owner][msg.sender]; // Saves gas for limited approvals.
 
-            if (allowed != type(uint256).max) allowance[owner][msg.sender] = allowed - shares;
-        }
+        //     if (allowed != type(uint256).max) allowance[owner][msg.sender] = allowed - shares;
+        // }
 
         // Check for rounding error since we round down in previewRedeem.
         require((assets = previewRedeem(shares)) != 0, "ZERO_ASSETS");
@@ -95,7 +95,7 @@ abstract contract ERC4626 is ERC20 {
 
         emit Withdraw(msg.sender, receiver, owner, assets, shares);
 
-        asset.safeTransfer(receiver, assets);
+        asset.transfer(receiver, assets);
     }
 
     /*//////////////////////////////////////////////////////////////
@@ -105,13 +105,13 @@ abstract contract ERC4626 is ERC20 {
     function totalAssets() public view virtual returns (uint256);
 
     function convertToShares(uint256 assets) public view virtual returns (uint256) {
-        uint256 supply = totalSupply; // Saves an extra SLOAD if totalSupply is non-zero.
+        uint256 supply = totalSupply(); // Saves an extra SLOAD if totalSupply is non-zero.
 
         return supply == 0 ? assets : assets.mulDivDown(supply, totalAssets());
     }
 
     function convertToAssets(uint256 shares) public view virtual returns (uint256) {
-        uint256 supply = totalSupply; // Saves an extra SLOAD if totalSupply is non-zero.
+        uint256 supply = totalSupply(); // Saves an extra SLOAD if totalSupply is non-zero.
 
         return supply == 0 ? shares : shares.mulDivDown(totalAssets(), supply);
     }
@@ -121,13 +121,13 @@ abstract contract ERC4626 is ERC20 {
     }
 
     function previewMint(uint256 shares) public view virtual returns (uint256) {
-        uint256 supply = totalSupply; // Saves an extra SLOAD if totalSupply is non-zero.
+        uint256 supply = totalSupply(); // Saves an extra SLOAD if totalSupply is non-zero.
 
         return supply == 0 ? shares : shares.mulDivUp(totalAssets(), supply);
     }
 
     function previewWithdraw(uint256 assets) public view virtual returns (uint256) {
-        uint256 supply = totalSupply; // Saves an extra SLOAD if totalSupply is non-zero.
+        uint256 supply = totalSupply(); // Saves an extra SLOAD if totalSupply is non-zero.
 
         return supply == 0 ? assets : assets.mulDivUp(supply, totalAssets());
     }
@@ -149,11 +149,11 @@ abstract contract ERC4626 is ERC20 {
     }
 
     function maxWithdraw(address owner) public view virtual returns (uint256) {
-        return convertToAssets(balanceOf[owner]);
+        return convertToAssets(balanceOf(owner));
     }
 
     function maxRedeem(address owner) public view virtual returns (uint256) {
-        return balanceOf[owner];
+        return balanceOf(owner);
     }
 
     /*//////////////////////////////////////////////////////////////

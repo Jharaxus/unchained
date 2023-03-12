@@ -28,6 +28,8 @@ contract DummyProcessor is StrategyProcessor {
     function totalAssets() public view virtual override returns (uint256) {
         return startingAsset.balanceOf(address(this));
     }
+
+    function completeWithdraw(address) public override {}
 }
 
 contract DummyERC20 is ERC20 {

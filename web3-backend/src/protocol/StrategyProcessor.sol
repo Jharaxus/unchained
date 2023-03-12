@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.17;
 
-import "solmate/tokens/ERC20.sol";
+import "..//third-party/ERC20.sol";
 import "solmate/auth/Owned.sol";
 
 abstract contract StrategyProcessor is Owned {
@@ -19,14 +19,16 @@ abstract contract StrategyProcessor is Owned {
         emit depositProcessed(amount);
     }
 
-    function _processDeposit(uint256 amount) internal virtual;
-
     function processWithdraw(address to, uint256 assets, uint256 shares) public virtual onlyOwner {
         _processWithdraw(to, assets, shares);
         emit withdrawProcessed(to, assets, shares);
     }
 
-    function _processWithdraw(address to, uint256 assets, uint256 shares) internal virtual;
+    function completeWithdraw(address to) public virtual;
 
     function totalAssets() public view virtual returns (uint256);
+
+    function _processDeposit(uint256 amount) internal virtual;
+
+    function _processWithdraw(address to, uint256 assets, uint256 shares) internal virtual;
 }

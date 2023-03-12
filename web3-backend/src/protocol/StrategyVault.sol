@@ -32,7 +32,7 @@ contract StrategyVault is ERC4626, Owned {
         require(processorSetup, "Owner must first setup the processor");
 
         uint256 amountToDeposit = asset.balanceOf(address(this));
-        asset.safeTransfer(address(processor), amountToDeposit);
+        asset.transfer(address(processor), amountToDeposit);
         processor.processDeposit(amountToDeposit);
 
         emit BatchDepositProcessed(amountToDeposit, msg.sender, lastBatchDepositId);
@@ -45,6 +45,10 @@ contract StrategyVault is ERC4626, Owned {
         require(!processorSetup, "Only a single setup is allowed");
         processor = StrategyProcessor(processorAddress);
         processorSetup = true;
+    }
+
+    function completeWithdraw(address to) public {
+        processor.completeWithdraw(to);
     }
 
     function totalAssets() public view virtual override returns (uint256) {
