@@ -6,7 +6,8 @@ import "../../src/protocol/StrategyVault.sol";
 import "../../src/processors/AlphaStrategyProcessor.sol";
 
 contract AlphaStrategyVaultScript is Script {
-    address aaveAddress = 0xC13eac3B4F9EED480045113B7af00F7B5655Ece8;
+    address aaveAddress = 0x7Fc66500c84A76Ad7e9c93437bFc5Ac33E2DDaE9;
+    address stkAaveeAddress = 0x4da27a545c0c5B758a6BA100e3a049001de870f5;
 
     function setUp() public {}
 
@@ -15,7 +16,7 @@ contract AlphaStrategyVaultScript is Script {
         vm.startBroadcast(deployerPrivateKey);
 
         StrategyVault alphaVault = new StrategyVault(aaveAddress, "Alpha vault", "aUVault");
-        AlphaStrategyProcessor processor = new AlphaStrategyProcessor(aaveAddress, address(alphaVault));
+        AlphaStrategyProcessor processor = new AlphaStrategyProcessor(aaveAddress, stkAaveeAddress, address(alphaVault));
         alphaVault.setupProcessor(address(processor));
 
         vm.stopBroadcast();
