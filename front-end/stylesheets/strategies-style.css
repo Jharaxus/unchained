@@ -543,6 +543,7 @@ background: linear-gradient(92.88deg, rgb(55, 75, 147) 9.16%, rgb(60, 47, 150) 4
 
 .state-operations{
   visibility: hidden;
+  display: none;
   z-index: 2;
   display: flex;
   justify-content: center;

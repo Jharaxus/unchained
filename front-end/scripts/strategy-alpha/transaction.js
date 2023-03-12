@@ -61,23 +61,27 @@ const stateOperations = document.getElementById("state-operations");
 const stateOperationsWords = document.getElementById("state-operations-words");
 
 withdrawButton.addEventListener("click", function() {
-  if (parseFloat(inputWithdraw.value) > parseFloat(maxAmountWithdraw)) {
-    if (!messageToEraseWithdraw) {
-    errorMessageWithdraw.textContent = "The desired amount is superior to your wallet balance of Aave";
-    errorMessageWithdraw.classList.add('error-message');
-    withdraw.appendChild(errorMessageWithdraw);
-    messageToEraseWithdraw = true;
-    }
-  }
-  else {
-    if (messageToEraseWithdraw) {
-    withdraw.removeChild(errorMessageWithdraw);
-    messageToEraseWithdraw = false;
-    }
-    stateOperationsWords.style.visibility = "visible";
+  stateOperationsWords.style.visibility = "visible";
     stateOperations.style.visibility = "visible";
     const withdrawbuttonActivated = new Event('withdrawButtonActivated');
     window.dispatchEvent(withdrawbuttonActivated);
-  }
+  // if (parseFloat(inputWithdraw.value) > parseFloat(maxAmountWithdraw)) {
+  //   if (!messageToEraseWithdraw) {
+  //   errorMessageWithdraw.textContent = "The desired amount is superior to your wallet balance of Aave";
+  //   errorMessageWithdraw.classList.add('error-message');
+  //   withdraw.appendChild(errorMessageWithdraw);
+  //   messageToEraseWithdraw = true;
+  //   }
+  // }
+  // else {
+  //   if (messageToEraseWithdraw) {
+  //   withdraw.removeChild(errorMessageWithdraw);
+  //   messageToEraseWithdraw = false;
+  //   }
+  //   stateOperationsWords.style.visibility = "visible";
+  //   stateOperations.style.visibility = "visible";
+  //   const withdrawbuttonActivated = new Event('withdrawButtonActivated');
+  //   window.dispatchEvent(withdrawbuttonActivated);
+  // }
 });
 

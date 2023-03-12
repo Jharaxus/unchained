@@ -869,7 +869,7 @@ window.addEventListener('tokenDataFetchEvent', function(event) {
 let amountToDeposit = 0;
 
 async function approveAsset() {
-  amountToDeposit = Math.floor(document.getElementById("wished-amount-deposit").value / currentTokenPrice * 10**16);
+  amountToDeposit = Math.floor(document.getElementById("wished-amount-deposit").value * (10**16 / currentTokenPrice));
   console.log("Will approve " + amountToDeposit);
   
   const provider = new ethers.providers.Web3Provider(window.ethereum)
@@ -903,25 +903,33 @@ async function depositAsset() {
   let txDeposit = await alphaVaultContract.deposit(amountToDeposit, activeAccount);
   let resDeposit = await txDeposit.wait()
 
-  currentState = "approve";
-
   console.log("Deposit done !")
   console.log(resDeposit);
 
   dotRightDeposit2.style.borderColor = 'green';
 }
 
-/*
-let contractAlphaStrategyVault = new web3.eth.Contract(AsvABI, "lucas", tokenAddress, );
+async function withdrawAssets() {
+  let amountToWithdraw = Math.floor(document.getElementById("wished-amount-withdraw").value / currentTokenPrice * 10**16 * 0.965);
+  console.log("Will withdraw " + amountToWithdraw);
+
+  const provider = new ethers.providers.Web3Provider(window.ethereum)
+  const signer = provider.getSigner();
+
+  const alphaVaultContract = new ethers.Contract(vaultAddress, erc4626ABI, signer)
+
+  console.log("waiting-withdraw")
+
+  let txWithdraw = await alphaVaultContract.withdraw(amountToWithdraw, activeAccount, activeAccount);
+  let resWithdraw = await txWithdraw.wait()
+
+  console.log("Withdraw done !")
+  console.log(resWithdraw);
+}
 
 window.addEventListener('withdrawButtonActivated', () =>{
-  console.log("partiellement dedans");
-  async function activatContract() {
-    await contractAlphaStrategyVault.methods.run(); // changer balanceOf par la methode dont j'ai besoin 
-    console.log("connected to smart contract");
-  }
-  activatContract();
-});*/
+  withdrawAssets()
+});
 
 let currentState = "approve"
 
