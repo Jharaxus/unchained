@@ -866,25 +866,49 @@ window.addEventListener('tokenDataFetchEvent', function(event) {
   currentTokenPrice = event.detail;
 });
 
-// let alphaVaultContract = new web3.eth.Contract(erc4626ABI, vaultAddress);
+let amountToDeposit = 0;
 
-async function depositAsset() {
-  console.log(document.getElementById("wished-amount-deposit").value);
-  console.log(currentTokenPrice);
-  let amountToDeposit = Math.floor(document.getElementById("wished-amount-deposit").value / currentTokenPrice * 10**16);
+async function approveAsset() {
+  amountToDeposit = Math.floor(document.getElementById("wished-amount-deposit").value / currentTokenPrice * 10**16);
+  console.log("Will approve " + amountToDeposit);
   
   const provider = new ethers.providers.Web3Provider(window.ethereum)
   const signer = provider.getSigner();
 
+  const aaveContract = new ethers.Contract(aaveAddress, erc20ABI, signer)
+
+  currentState = "waiting-approve"
+  console.log(currentState)
+
+  let txApproval = await aaveContract.approve(vaultAddress, amountToDeposit)
+  let resApproval = await txApproval.wait()
+  
+  currentState = "deposit"
+
+  console.log("Approve done !")
+  console.log(resApproval);
+}
+
+async function depositAsset() {
+  console.log("Will deposit " + amountToDeposit);
+
+  const provider = new ethers.providers.Web3Provider(window.ethereum)
+  const signer = provider.getSigner();
+
   const alphaVaultContract = new ethers.Contract(vaultAddress, erc4626ABI, signer)
-  let tx = await alphaVaultContract.approve(vaultAddress, amountToDeposit)
-  let res = await tx.wait()
-  console.log("Approve done !" + res)
 
-  // let approved = await aaveContract.methods.approve(vaultAddress, amountToDeposit).call();
+  currentState = "waiting-deposit"
+  console.log(currentState)
 
-  // let sharesOwned = await alphaVaultContract.methods.deposit(amountToDeposit, activeAccount).call();
-  // console.log(sharesOwned);
+  let txDeposit = await alphaVaultContract.deposit(amountToDeposit, activeAccount);
+  let resDeposit = await txDeposit.wait()
+
+  currentState = "approve";
+
+  console.log("Deposit done !")
+  console.log(resDeposit);
+
+  dotRightDeposit2.style.borderColor = 'green';
 }
 
 /*
@@ -899,18 +923,23 @@ window.addEventListener('withdrawButtonActivated', () =>{
   activatContract();
 });*/
 
+let currentState = "approve"
+
 window.addEventListener('DepositButtonActivated', () =>{
   if (activeAccount != null) {
-    dotLeftDeposit.style.borderColor = 'green';
-    dotRightDeposit1.style.borderColor = 'green';
-    dotRightDeposit2.style.borderColor = 'green';
-    lineDeposit1.style.background = 'linear-gradient(to right, rgba(114, 224, 86, 0.402), rgb(2, 9, 26))';
-    lineDeposit2.style.background = 'linear-gradient(to right, rgba(114, 224, 86, 0.402), rgb(2, 9, 26))';
-    approvalWordDeposit.style.color = 'snow';
-    delegateWordDeposit.style.color = 'snow';
-    completedWordDeposit.style.color = 'snow';
-    lineDeposit1.style.backgroundColor = 'background: linear-gradient(to right, rgba(114, 224, 86, 0.402), rgb(2, 9, 26))'
-    lineDeposit2.style.backgroundColor = 'background: linear-gradient(to right, rgba(114, 224, 86, 0.402), rgb(2, 9, 26))'
-    depositAsset();
+    if (currentState === "approve") {
+      dotLeftDeposit.style.borderColor = 'green';
+      lineDeposit1.style.background = 'linear-gradient(to right, rgba(114, 224, 86, 0.402), rgb(2, 9, 26))';
+      // lineDeposit1.style.backgroundColor = 'background: linear-gradient(to right, rgba(114, 224, 86, 0.402), rgb(2, 9, 26))'
+      approvalWordDeposit.style.color = 'snow';
+      delegateWordDeposit.style.color = 'snow';
+      completedWordDeposit.style.color = 'snow';
+      approveAsset();
+    } else if (currentState == "deposit") {
+      dotRightDeposit1.style.borderColor = 'green';
+      // lineDeposit2.style.backgroundColor = 'background: linear-gradient(to right, rgba(114, 224, 86, 0.402), rgb(2, 9, 26))'
+      lineDeposit2.style.background = 'linear-gradient(to right, rgba(114, 224, 86, 0.402), rgb(2, 9, 26))';
+      depositAsset()
+    }
   }
 });
