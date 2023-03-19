@@ -7,9 +7,18 @@ const dotRightDeposit2 = document.querySelector('.dot.right-deposit2');
 const lineDeposit1 = document.querySelector('.line-deposit1');
 const lineDeposit2 = document.querySelector('.line-deposit2');
 
-const approvalWordDeposit = document.querySelector('.approval-word-deposit');
 const delegateWordDeposit = document.querySelector('.delegate-word-deposit');
 const completedWordDeposit = document.querySelector('.completed-word-deposit');
+
+const dotLeftWithdraw = document.querySelector('.dot.left');
+const dotRightWithdraw1 = document.querySelector('.dot.right1');
+const dotRightWithdraw2 = document.querySelector('.dot.right2');
+
+const lineWithdrawt1 = document.querySelector('.line1');
+const lineWithdraw2 = document.querySelector('.line2');
+
+const delegateWordWithdraw = document.querySelector('.delegate-word');
+const completedWordWithdraw = document.querySelector('.completed-word');
 
 // The minimum ABI to get ERC20 Token balance
 let erc20ABI = [
@@ -845,8 +854,8 @@ let activeAccount = null;
 let currentTokenPrice = 0;
 
 async function getAaveBalance() {
-  let balance = await aaveContract.methods.balanceOf(activeAccount).call(); // changer balanceOf par la methode dont j'ai besoin 
-  const balanceConverted = balance / 10**16;
+  let balance = await aaveContract.methods.balanceOf(activeAccount).call();
+  const balanceConverted = balance / 10**18;
   return balanceConverted;
 }
 
@@ -869,7 +878,7 @@ window.addEventListener('tokenDataFetchEvent', function(event) {
 let amountToDeposit = 0;
 
 async function approveAsset() {
-  amountToDeposit = Math.floor(document.getElementById("wished-amount-deposit").value * (10**16 / currentTokenPrice));
+  amountToDeposit = Math.floor(document.getElementById("wished-amount-deposit").value * (10**18 / currentTokenPrice));
   console.log("Will approve " + amountToDeposit);
   
   const provider = new ethers.providers.Web3Provider(window.ethereum)
@@ -877,13 +886,10 @@ async function approveAsset() {
 
   const aaveContract = new ethers.Contract(aaveAddress, erc20ABI, signer)
 
-  currentState = "waiting-approve"
-  console.log(currentState)
 
   let txApproval = await aaveContract.approve(vaultAddress, amountToDeposit)
   let resApproval = await txApproval.wait()
   
-  currentState = "deposit"
 
   console.log("Approve done !")
   console.log(resApproval);
@@ -897,20 +903,15 @@ async function depositAsset() {
 
   const alphaVaultContract = new ethers.Contract(vaultAddress, erc4626ABI, signer)
 
-  currentState = "waiting-deposit"
-  console.log(currentState)
-
   let txDeposit = await alphaVaultContract.deposit(amountToDeposit, activeAccount);
   let resDeposit = await txDeposit.wait()
 
   console.log("Deposit done !")
   console.log(resDeposit);
-
-  dotRightDeposit2.style.borderColor = 'green';
 }
 
 async function withdrawAssets() {
-  let amountToWithdraw = Math.floor(document.getElementById("wished-amount-withdraw").value / currentTokenPrice * 10**16 * 0.965);
+  let amountToWithdraw = Math.floor(document.getElementById("wished-amount-withdraw").value / currentTokenPrice * 10**18 * 0.965);
   console.log("Will withdraw " + amountToWithdraw);
 
   const provider = new ethers.providers.Web3Provider(window.ethereum)
@@ -927,27 +928,29 @@ async function withdrawAssets() {
   console.log(resWithdraw);
 }
 
-window.addEventListener('withdrawButtonActivated', () =>{
-  withdrawAssets()
+window.addEventListener('withdrawButtonActivated', async () =>{
+  if (activeAccount != null) {
+    withdrawAssets()
+    dotLeftDeposit.style.borderColor = 'rgba(114, 224, 86, 0.6)';
+    lineDeposit1.style.background = 'linear-gradient(to right, rgba(114, 224, 86, 0.402), rgb(2, 9, 26))';
+    delegateWordDeposit.style.color = 'snow';
+    dotRightDeposit2.style.borderColor = 'green';
+    dotRightDeposit1.style.borderColor = 'rgba(114, 224, 86, 0.6)';
+    lineDeposit2.style.background = 'linear-gradient(to right, rgba(114, 224, 86, 0.402), rgb(2, 9, 26))';
+    completedWordDeposit.style.color = 'snow';
+}
 });
 
-let currentState = "approve"
-
-window.addEventListener('DepositButtonActivated', () =>{
+window.addEventListener('DepositButtonActivated', async () =>{
   if (activeAccount != null) {
-    if (currentState === "approve") {
-      dotLeftDeposit.style.borderColor = 'green';
+      await approveAsset();
+      dotLeftDeposit.style.borderColor = 'rgba(114, 224, 86, 0.6)';
       lineDeposit1.style.background = 'linear-gradient(to right, rgba(114, 224, 86, 0.402), rgb(2, 9, 26))';
-      // lineDeposit1.style.backgroundColor = 'background: linear-gradient(to right, rgba(114, 224, 86, 0.402), rgb(2, 9, 26))'
-      approvalWordDeposit.style.color = 'snow';
       delegateWordDeposit.style.color = 'snow';
-      completedWordDeposit.style.color = 'snow';
-      approveAsset();
-    } else if (currentState == "deposit") {
-      dotRightDeposit1.style.borderColor = 'green';
-      // lineDeposit2.style.backgroundColor = 'background: linear-gradient(to right, rgba(114, 224, 86, 0.402), rgb(2, 9, 26))'
+      await depositAsset();
+      dotRightDeposit2.style.borderColor = 'green';
+      dotRightDeposit1.style.borderColor = 'rgba(114, 224, 86, 0.6)';
       lineDeposit2.style.background = 'linear-gradient(to right, rgba(114, 224, 86, 0.402), rgb(2, 9, 26))';
-      depositAsset()
-    }
+      completedWordDeposit.style.color = 'snow';
   }
 });
