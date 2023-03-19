@@ -869,9 +869,9 @@ window.addEventListener('tokenDataFetchEvent', function(event) {
 let amountToDeposit = 0;
 
 async function approveAsset() {
-  amountToDeposit = Math.floor(document.getElementById("wished-amount-deposit").value * (10**16 / currentTokenPrice));
+  amountToDeposit = BigInt(document.getElementById("wished-amount-deposit").value) * (10n**12n / BigInt(Math.floor(currentTokenPrice * 1000)));
   console.log("Will approve " + amountToDeposit);
-  
+
   const provider = new ethers.providers.Web3Provider(window.ethereum)
   const signer = provider.getSigner();
 
@@ -910,7 +910,7 @@ async function depositAsset() {
 }
 
 async function withdrawAssets() {
-  let amountToWithdraw = Math.floor(document.getElementById("wished-amount-withdraw").value / currentTokenPrice * 10**16 * 0.965);
+  let amountToWithdraw = BigInt(Math.floor(document.getElementById("wished-amount-withdraw").value / currentTokenPrice * 0.965)) * 10n**16n;
   console.log("Will withdraw " + amountToWithdraw);
 
   const provider = new ethers.providers.Web3Provider(window.ethereum)

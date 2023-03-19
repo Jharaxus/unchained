@@ -70,6 +70,49 @@ const tokens_available = [
 ]
 let current_token = 0
 
+const tokens_data_cached = {
+  "aave" : {
+    name: 'Aave',
+    symbol: 'aave',
+    description: 'Aave is a decentralized money market protocol wher…s to take out loans from the liquidity pools.',
+    homepage: 'https://app.aave.com/?referral=93',
+    current_price: 73.01,
+    image: 'https://assets.coingecko.com/coins/images/12645/large/AAVE.png?1601374110',
+  },
+  "wrapped-bitcoin" : {
+    name: 'Wrapped Bitcoin',
+    symbol: 'wbtc',
+    description: '',
+    homepage: 'https://www.wbtc.network/',
+    current_price: 25212,
+    image: 'https://assets.coingecko.com/coins/images/7598/large/wrapped_bitcoin_wbtc.png?1548822744'
+  },
+  "usd-coin" : {
+    name: 'USD Coin',
+    symbol: 'usdc',
+    description: 'USDC is a fully collateralized US dollar stablecoi…s, we can create a more inclusive global economy.',
+    homepage: "https://www.circle.com/en/usdc",
+    current_price: 0.931162,
+    image: "https://assets.coingecko.com/coins/images/6319/large/USD_Coin_icon.png?1547042389"
+  },
+  "tether" : {
+    name: 'Tether',
+    symbol: 'usdt',
+    description: 'Tether (USDT) is a cryptocurrency with a value mea…ersion between USD to and from your bank account.',
+    homepage: "https://tether.to/",
+    current_price: 0.933609,
+    image: "https://assets.coingecko.com/coins/images/325/large/Tether.png?1668148663"
+  },
+  "weth" : {
+    name: 'WETH',
+    symbol: 'weth',
+    description: 'What is WETH (Wrapped ETH)?\r\nWETH is the tokenized…make it compliant with its own ERC-20 standards. ',
+    homepage: "https://weth.io/",
+    current_price: 1657.88,
+    image: "https://assets.coingecko.com/coins/images/2518/large/weth.png?1628852295"
+  }
+}
+
 const tokens_data = Object.create(null)
 const user_tokens_balance = Object.create(null)
 const user_strategy_balances = Object.create(null)
@@ -96,6 +139,7 @@ selectTokenRight.addEventListener('click', () => {
 })
 
 function load_token_data(token) {
+  let worked = false
   axios.get('https://api.coingecko.com/api/v3/coins/' + token + '?tickers=false&market_data=true&community_data=false&developer_data=true&sparkline=true')
     .then(function(response) {
       const response_json = response["data"]
@@ -104,13 +148,15 @@ function load_token_data(token) {
         "name": response_json["name"],
         "symbol": response_json["symbol"],
         "description": response_json["description"]["fr"],
-        "homepage": response_json["links"]["homepage"],
+        "homepage": response_json["links"]["homepage"][0],
         "current_price": Number(response_json["market_data"]["current_price"]["eur"]),
         "image": response_json["image"]["large"]
       }
+      console.log(tokens_data[token])
     })
     .catch(function(error) {
       console.log(error)
+      tokens_data[token] = tokens_data_cached[token]
     })
     .finally(function () {
       if (token === tokens_available[current_token]) {
