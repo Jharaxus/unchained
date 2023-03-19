@@ -542,8 +542,6 @@ background: linear-gradient(92.88deg, rgb(55, 75, 147) 9.16%, rgb(60, 47, 150) 4
 }
 
 .state-operations{
-  visibility: hidden;
-  display: none;
   z-index: 2;
   display: flex;
   justify-content: center;
@@ -615,46 +613,31 @@ background: linear-gradient(92.88deg, rgb(55, 75, 147) 9.16%, rgb(60, 47, 150) 4
   margin-bottom: auto;
 }
 
-.operation.delegate .line {
-  background: linear-gradient(to right, rgba(114, 224, 86, 0.402), rgb(2, 9, 26));
-}
-
-.operation.completed .line {
-}
-
 .state-operations-words{
-  visibility: hidden;
   z-index: 2;
   display: flex;
   font-size: 0.3em;
   justify-content: center;
   flex-direction: row;
-  align-content: space-between;
-  width: 90%;
+  align-content: space-around;
+  width: 70%;
   margin-bottom: 40px;
   height: 1em;
   text-align: center;
 }
 
-.approval-word{
+.withdraw-word{
+  color: snow;
   display: flex;
-  padding-left: 9.5%;
   flex-direction: row;
-  width: 20%;
-}
-.delegate-word{
-  color: rgb(77, 77, 77);
-  display: flex;
-  padding-left: 26%;
-  flex-direction: row;
-  width: 40%;
+  width: auto;
 }
 .completed-word{
   color: rgb(77, 77, 77);
   display: flex;
-  padding-left: 14%;
+  padding-left: 40%;
   flex-direction: row;
-  width: 40%;
+  width: auto;
 }
 
 
@@ -733,7 +716,7 @@ background: linear-gradient(92.88deg, rgb(55, 75, 147) 9.16%, rgb(60, 47, 150) 4
   display: block;
   margin-top: auto;
   margin-bottom: auto;
-  background-color: rgb(77, 77, 77);
+  background-color: rgba(77, 77, 77, 0);
 }
 
 .state-operations-words-deposit{
@@ -751,7 +734,7 @@ background: linear-gradient(92.88deg, rgb(55, 75, 147) 9.16%, rgb(60, 47, 150) 4
 }
 
 .approval-word-deposit{
-  color: rgb(77, 77, 77);
+  color: snow;
   display: flex;
   padding-left: 9.5%;
   flex-direction: row;

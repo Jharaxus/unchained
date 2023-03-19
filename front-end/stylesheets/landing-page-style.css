@@ -160,6 +160,10 @@ header {
   padding-right: 2rem;
 }
 
+.funds{
+  padding-top: 30px;
+}
+
 .value-proposition {
   display: flex;
   flex-direction: column;
@@ -182,12 +186,6 @@ header {
 
 .value-proposition p .proposition-explained {
   line-height: 0;
-}
-
-.delimiter {
-}
-
-.delimiter2 {
 }
 
 .div-launch-button{
@@ -299,7 +297,7 @@ header {
 
 .ray-of-light {
   position: absolute;
-  top: 50%;
+  top: 47%;
   left: 0;
   width: 90px;
   height: 1px;
@@ -319,7 +317,7 @@ header {
 
 .ray-of-light2 {
   position: absolute;
-  top: 130%;
+  top: 120%;
   left: 0;
   width: 90px;
   height: 1px;
