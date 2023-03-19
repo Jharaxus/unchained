@@ -139,7 +139,6 @@ selectTokenRight.addEventListener('click', () => {
 })
 
 function load_token_data(token) {
-  let worked = false
   axios.get('https://api.coingecko.com/api/v3/coins/' + token + '?tickers=false&market_data=true&community_data=false&developer_data=true&sparkline=true')
     .then(function(response) {
       const response_json = response["data"]
