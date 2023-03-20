@@ -60,7 +60,15 @@ let erc20ABI = [
     "name":"decimals",
     "outputs":[{"name":"","type":"uint8"}],
     "type":"function"
-  }
+  },
+  // symbol
+  {
+    "constant":true,
+    "inputs":[],
+    "name":"symbol",
+    "outputs":[{"name":"","type":"string"}],
+    "type":"function"
+  },
 ];
 
 let erc4626ABI = [
@@ -889,6 +897,7 @@ let amountToDeposit = 0;
 
 async function approveAsset() {
   const amountRequested = BigInt(document.getElementById("wished-amount-deposit").value);
+  document.getElementById("wished-amount-deposit").value = ""
   const convertionRate = BigInt(Math.floor(currentTokenPrice * 1000))
   amountToDeposit = 10n**21n * amountRequested / convertionRate;
   console.log("Will approve " + amountToDeposit);
@@ -924,7 +933,8 @@ async function depositAsset() {
 
 async function withdrawAssets() {
   const amountRequested = BigInt(document.getElementById("wished-amount-withdraw").value);
-  const convertionRate = BigInt(Math.floor(currentTokenPrice * 1000 * 0.965))
+  document.getElementById("wished-amount-withdraw").value = ""
+  const convertionRate = BigInt(Math.floor(currentTokenPrice * 1000))
   let amountToWithdraw = 10n**21n * amountRequested / convertionRate;
   console.log("Will withdraw " + amountToWithdraw);
 
@@ -943,17 +953,23 @@ async function withdrawAssets() {
 }
 
 window.addEventListener('askForStrategyBalance', async () =>{
+  sendStrategyBalance()
+})
+
+async function sendStrategyBalance() {
   const provider = new ethers.providers.Web3Provider(window.ethereum)
   const alphaVaultContract = new ethers.Contract(vaultAddress, erc20ABI, provider)
   const balance = await alphaVaultContract.balanceOf(activeAccount)
   const symbol = await alphaVaultContract.symbol()
-  const replyEnvent = new CustomEvent('replyForStrategyBalance', {detail: balance, tokenSymbol: symbol})
+  // const replyEnvent = new CustomEvent('replyForStrategyBalance', {detail: {"balance": balance, "symbol": symbol}})
+  console.log("BALANCE: " + balance)
+  const replyEnvent = new CustomEvent('replyForStrategyBalance', {detail: {"balance": balance, "symbol": "shares"}})
   window.dispatchEvent(replyEnvent)
-})
+}
 
 window.addEventListener('withdrawButtonActivated', async () =>{
   if (activeAccount != null) {
-    withdrawAssets()
+    await withdrawAssets()
     dotLeftDeposit.style.borderColor = 'rgba(114, 224, 86, 0.6)';
     lineDeposit1.style.background = 'linear-gradient(to right, rgba(114, 224, 86, 0.402), rgb(2, 9, 26))';
     delegateWordDeposit.style.color = 'snow';
@@ -961,6 +977,7 @@ window.addEventListener('withdrawButtonActivated', async () =>{
     dotRightDeposit1.style.borderColor = 'rgba(114, 224, 86, 0.6)';
     lineDeposit2.style.background = 'linear-gradient(to right, rgba(114, 224, 86, 0.402), rgb(2, 9, 26))';
     completedWordDeposit.style.color = 'snow';
+    await sendStrategyBalance()
 }
 });
 
@@ -975,5 +992,6 @@ window.addEventListener('DepositButtonActivated', async () =>{
       dotRightDeposit1.style.borderColor = 'rgba(114, 224, 86, 0.6)';
       lineDeposit2.style.background = 'linear-gradient(to right, rgba(114, 224, 86, 0.402), rgb(2, 9, 26))';
       completedWordDeposit.style.color = 'snow';
+      updateAaveBalance();
   }
 });

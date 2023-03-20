@@ -43,6 +43,7 @@ function switchToDeposit() {
   interfaceDeposit.style.display = "flex";
 
   currentInterface = depositInterface;
+  hideWithdrawInterface()
 }
 
 function switchToWithdraw() {
@@ -60,6 +61,7 @@ function switchToWithdraw() {
   
   currentInterface = withdrawInterface;
 
+  hideDepositInterface()
   askForStrategyBalance()
 }
 
@@ -200,12 +202,14 @@ function askForStrategyBalance() {
 }
 
 window.addEventListener('replyForStrategyBalance', function(event) {
-  let balance = event.detail
-  let symbol = event.tokenSymbol
+  let balance = event.detail["balance"]
+  let symbol = event.detail["symbol"]
   const aaveValue = BigInt(Math.floor(tokens_data["aave"]["current_price"] * 1000))
   const strategyValueOwned = BigInt(balance) * aaveValue / 10n**21n
-  withdrawBalanceLabel.textContent = balance.toFixed(2)
+  console.log(typeof(balance))
+  withdrawBalanceLabel.textContent = (Number(BigInt(balance) / 10n**15n) / 1000.).toFixed(2)
   withdrawBalanceWorth.textContent = "worth: " + strategyValueOwned + "€";
+  console.log(symbol)
   withdrawTokenSymbol.textContent = symbol
 })
 
@@ -229,3 +233,11 @@ window.addEventListener('UpdateDeposit', function(event) {
   const depositBalanceWorthSend = new CustomEvent('depositBalanceWorthSend', { detail: valueDepositBalanceWorth});
   window.dispatchEvent(depositBalanceWorthSend);
 });
+
+function hideWithdrawInterface() {
+  // TODO
+}
+
+function hideDepositInterface() {
+  // TODO
+}
