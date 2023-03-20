@@ -181,12 +181,17 @@ function switchWithNextToken(direction) {
   tokenSelectedLogo.src = tokenData["image"]
   tokenSelectedName.textContent = tokenData["name"]
 
-  depositBalanceLabel.textContent = current_token_balance
+  depositBalanceLabel.textContent = current_token_balance.toFixed(2)
   depositTokenSymbol.textContent = tokenData["symbol"]
   const valueDepositBalanceWorth = (current_token_balance * tokenData["current_price"]).toFixed(2);
   depositBalanceWorth.textContent = "worth: " + valueDepositBalanceWorth + "€";
   const depositBalanceWorthSend = new CustomEvent('depositBalanceWorthSend', { detail: valueDepositBalanceWorth});
-  window.dispatchEvent(depositBalanceWorthSend);
+  window.dispatchEvent(depositBalanceWorthSend)
+  
+  if (tokenData["name"] === "Aave") {
+    const aaveNotification = new CustomEvent('switchedToAave');
+    window.dispatchEvent(aaveNotification)
+  }
 }
 
 function askForStrategyBalance() {
@@ -195,10 +200,13 @@ function askForStrategyBalance() {
 }
 
 window.addEventListener('replyForStrategyBalance', function(event) {
-  let balance = BigInt(event.detail)
+  let balance = event.detail
+  let symbol = event.tokenSymbol
   const aaveValue = BigInt(Math.floor(tokens_data["aave"]["current_price"] * 1000))
-  const strategyValueOwned = balance * aaveValue / 10n**21n
+  const strategyValueOwned = BigInt(balance) * aaveValue / 10n**21n
+  withdrawBalanceLabel.textContent = balance.toFixed(2)
   withdrawBalanceWorth.textContent = "worth: " + strategyValueOwned + "€";
+  withdrawTokenSymbol.textContent = symbol
 })
 
 function nextToken(tokenId, max, direction) {

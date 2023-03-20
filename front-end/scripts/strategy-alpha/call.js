@@ -864,12 +864,22 @@ let walletBalance = document.getElementById("wallet-deposit-token-balance");
 window.addEventListener('addressToCatch', function(event) {
   activeAccount = event.detail;
   console.log(activeAccount);
-  getAaveBalance().then(function (result) {
-    walletBalance.textContent = result;
-    const walletBalanceWorthSend = new CustomEvent('UpdateDeposit', {detail: result});
-    window.dispatchEvent(walletBalanceWorthSend);
-  });
+  updateAaveBalance()
 });
+
+function updateAaveBalance() {
+  if (activeAccount != null) {
+    getAaveBalance().then(function (result) {
+      walletBalance.textContent = result.toFixed(2)
+      const walletBalanceWorthSend = new CustomEvent('UpdateDeposit', {detail: result});
+      window.dispatchEvent(walletBalanceWorthSend);
+    });
+  }
+}
+
+window.addEventListener('switchedToAave', function(event) {
+  updateAaveBalance()
+})
 
 window.addEventListener('tokenDataFetchEvent', function(event) {
   currentTokenPrice = event.detail;
@@ -936,7 +946,8 @@ window.addEventListener('askForStrategyBalance', async () =>{
   const provider = new ethers.providers.Web3Provider(window.ethereum)
   const alphaVaultContract = new ethers.Contract(vaultAddress, erc20ABI, provider)
   const balance = await alphaVaultContract.balanceOf(activeAccount)
-  const replyEnvent = new CustomEvent('replyForStrategyBalance', {detail: balance})
+  const symbol = await alphaVaultContract.symbol()
+  const replyEnvent = new CustomEvent('replyForStrategyBalance', {detail: balance, tokenSymbol: symbol})
   window.dispatchEvent(replyEnvent)
 })
 
