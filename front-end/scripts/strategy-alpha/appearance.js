@@ -59,6 +59,8 @@ function switchToWithdraw() {
   interfaceWithdraw.style.display = "flex";
   
   currentInterface = withdrawInterface;
+
+  askForStrategyBalance()
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -175,7 +177,6 @@ function switchWithNextToken(direction) {
   window.dispatchEvent(tokenDataFetchEvent);;
 
   const current_token_balance = user_tokens_balance[token]
-  var current_strategy_balance = user_strategy_balances[token]
   
   tokenSelectedLogo.src = tokenData["image"]
   tokenSelectedName.textContent = tokenData["name"]
@@ -186,14 +187,19 @@ function switchWithNextToken(direction) {
   depositBalanceWorth.textContent = "worth: " + valueDepositBalanceWorth + "€";
   const depositBalanceWorthSend = new CustomEvent('depositBalanceWorthSend', { detail: valueDepositBalanceWorth});
   window.dispatchEvent(depositBalanceWorthSend);
-
-  withdrawBalanceLabel.textContent = current_strategy_balance;
-  withdrawTokenSymbol.textContent = tokenData["symbol"];
-  const valueWithdrawBalanceWorth = (current_strategy_balance * tokenData["current_price"]).toFixed(2);
-  withdrawBalanceWorth.textContent = "worth: " + valueWithdrawBalanceWorth + "€";
-  const withdrawBalanceWorthSend = new CustomEvent('withdrawBalanceWorthSend', { detail: valueWithdrawBalanceWorth});
-  window.dispatchEvent(withdrawBalanceWorthSend);
 }
+
+function askForStrategyBalance() {
+  const askEnvent = new CustomEvent('askForStrategyBalance');
+  window.dispatchEvent(askEnvent)
+}
+
+window.addEventListener('replyForStrategyBalance', function(event) {
+  let balance = BigInt(event.detail)
+  const aaveValue = BigInt(Math.floor(tokens_data["aave"]["current_price"] * 1000))
+  const strategyValueOwned = balance * aaveValue / 10n**21n
+  withdrawBalanceWorth.textContent = "worth: " + strategyValueOwned + "€";
+})
 
 function nextToken(tokenId, max, direction) {
   if (direction === "left")
@@ -206,13 +212,12 @@ function nextToken(tokenId, max, direction) {
 for (let token of tokens_available) {
   load_token_data(token)
   user_tokens_balance[token] = 0
-  user_strategy_balances[token] = 0
 }
 
 window.addEventListener('UpdateDeposit', function(event) {
   let result = event.detail;
-  const valueWithdrawBalanceWorth = (result * tokenDataSaviorPrice).toFixed(2);
-  depositBalanceWorth.textContent = "worth: " + valueWithdrawBalanceWorth + "€"; 
-  const withdrawBalanceWorthSend = new CustomEvent('depositBalanceWorthSend', { detail: valueWithdrawBalanceWorth});
-  window.dispatchEvent(withdrawBalanceWorthSend);
+  const valueDepositBalanceWorth = (result * tokenDataSaviorPrice).toFixed(2);
+  depositBalanceWorth.textContent = "worth: " + valueDepositBalanceWorth + "€"; 
+  const depositBalanceWorthSend = new CustomEvent('depositBalanceWorthSend', { detail: valueDepositBalanceWorth});
+  window.dispatchEvent(depositBalanceWorthSend);
 });

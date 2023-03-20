@@ -15,15 +15,10 @@ inputWithdraw.addEventListener('keydown', validateInput);
 const supplyButton = document.getElementById("supply-button");
 const withdrawButton = document.getElementById("withdraw-button")
 
-var maxAmountWithdraw;
 var maxAmountDeposit;
 
 window.addEventListener('depositBalanceWorthSend', function(event) {
   maxAmountDeposit = event.detail;
-});
-
-window.addEventListener('withdrawBalanceWorthSend', function(event) {
-  maxAmountWithdraw = event.detail;
 });
 
 const deposit = document.querySelector('.interface-deposit');
@@ -65,23 +60,5 @@ withdrawButton.addEventListener("click", function() {
     stateOperations.style.visibility = "visible";
     const withdrawbuttonActivated = new Event('withdrawButtonActivated');
     window.dispatchEvent(withdrawbuttonActivated);
-  // if (parseFloat(inputWithdraw.value) > parseFloat(maxAmountWithdraw)) {
-  //   if (!messageToEraseWithdraw) {
-  //   errorMessageWithdraw.textContent = "The desired amount is superior to your wallet balance of Aave";
-  //   errorMessageWithdraw.classList.add('error-message');
-  //   withdraw.appendChild(errorMessageWithdraw);
-  //   messageToEraseWithdraw = true;
-  //   }
-  // }
-  // else {
-  //   if (messageToEraseWithdraw) {
-  //   withdraw.removeChild(errorMessageWithdraw);
-  //   messageToEraseWithdraw = false;
-  //   }
-  //   stateOperationsWords.style.visibility = "visible";
-  //   stateOperations.style.visibility = "visible";
-  //   const withdrawbuttonActivated = new Event('withdrawButtonActivated');
-  //   window.dispatchEvent(withdrawbuttonActivated);
-  // }
 });
 

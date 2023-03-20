@@ -932,6 +932,14 @@ async function withdrawAssets() {
   console.log(resWithdraw);
 }
 
+window.addEventListener('askForStrategyBalance', async () =>{
+  const provider = new ethers.providers.Web3Provider(window.ethereum)
+  const alphaVaultContract = new ethers.Contract(vaultAddress, erc20ABI, provider)
+  const balance = await alphaVaultContract.balanceOf(activeAccount)
+  const replyEnvent = new CustomEvent('replyForStrategyBalance', {detail: balance})
+  window.dispatchEvent(replyEnvent)
+})
+
 window.addEventListener('withdrawButtonActivated', async () =>{
   if (activeAccount != null) {
     withdrawAssets()
