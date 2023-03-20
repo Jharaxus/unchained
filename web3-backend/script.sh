@@ -5,8 +5,8 @@ export YOUR_KEY=
 export ALPHA_VAULT=0x47c05bcca7d57c87083eb4e586007530ee4539e9
 export AAVE=0x7Fc66500c84A76Ad7e9c93437bFc5Ac33E2DDaE9
 
-export BINANCE_BALANCE_A=00000400000000000000000000
-export BINANCE_BALANCE_B=00000200000000000000000000
+export BINANCE_BALANCE_A=00000040000000000000000000
+export BINANCE_BALANCE_B=00000020000000000000000000
 
 forge script script/strategies/AlphaStrategyVault.s.sol:AlphaStrategyVaultScript --fork-url http://localhost:8545 --broadcast
 cast call $AAVE "balanceOf(address)(uint256)" $BINANCE
